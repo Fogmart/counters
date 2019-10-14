@@ -44,7 +44,14 @@ class CtVals extends \yii\db\ActiveRecord
             'id' => 'ID',
             'ctid' => 'Ctid',
             'val' => 'Val',
+            'va2' => 'Val',
+            'va3' => 'Val',
             'whn' => 'Whn',
         ];
+    }
+
+    public function check(){
+        $v = CtVals::find()->where(["ctid"=>$this->ctid, 'whn'=>$this->whn, "val"=>$this->val])->one();
+        if (!$v) $this->save();
     }
 }

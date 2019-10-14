@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\Counter;
+use app\models\CtTypes;
 use Yii;
 use app\models\Uploadedfiles;
 use app\models\UploadedfilesSearch;
@@ -64,33 +66,18 @@ class UploadedfilesController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Uploadedfiles();
 
 
-        foreach ($_FILES as $f){
+        if (Yii::$app->request->isPost) {
+            date_default_timezone_set('UTC');
 
-            $row = 1;
-            print_r($f["tmp_name"]["file"]);
-            if (($handle = fopen($f["tmp_name"]["file"], "r")) !== FALSE) {
-                while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
-                    $num = count($data);
-                    echo "<p> $num полей в строке $row: <br /></p>\n";
-                    $row++;
-                    for ($c=0; $c < $num; $c++) {
-                        echo $data[$c] . "<br />\n";
-                    }
-                }
-                fclose($handle);
+            foreach ($_FILES as $f) {
+                Uploadedfiles::saveFiles($f);
             }
-
-        }
-        return;
-
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->actionIndex();
         }
 
+        $model = new Uploadedfiles();
         return $this->render('create', [
             'model' => $model,
         ]);
@@ -145,4 +132,10 @@ class UploadedfilesController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    public function actionTst()
+    {
+        print_r(CtTypes::getTypeID("SV"));
+    }
+
 }

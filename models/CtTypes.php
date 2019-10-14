@@ -44,4 +44,16 @@ class CtTypes extends \yii\db\ActiveRecord
             'code' => 'Code',
         ];
     }
+
+    public static function getTypeID( $type ){
+        $id = "";
+        foreach (CtTypes::find()->all() as $one){
+            if (strpos($type, $one->code) !== false){
+                $id = $one->id;
+                break;
+            }
+        }
+        return $id;
+
+    }
 }

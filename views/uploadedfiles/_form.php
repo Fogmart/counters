@@ -10,9 +10,9 @@ use yii\widgets\ActiveForm;
 
 <div class="uploadedfiles-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
 
-    <?= $form->field($model, 'file')->fileInput() ?>
+    <?= $form->field($model, 'file[]')->fileInput(['multiple' => true,]) ?>
 
 
 

@@ -44,4 +44,27 @@ class Counter extends \yii\db\ActiveRecord
             'num' => 'Num',
         ];
     }
+
+    public static function getCounterID( $num, $type ){
+        $tid = CtTypes::getTypeID($type);
+        $c = Counter::find()->where(["num"=>$num, "type"=> $tid])->one();
+        if ($c){
+            $id = $c->id;
+        }else{
+            $c = new Counter();
+            $c->num = $num;
+            $c->type = $tid;
+            $c->save();
+            $id = $c->id;
+        }
+        return $id;
+    }
+
+    public function getVals(){
+        return $this->hasMany(CtVals::className(), ['ctid'=>'id'])->orderBy("whn");
+    }
+
+    public function getTypeN(){
+        return $this->hasOne(CtTypes::className(), ['id'=>'type']);
+    }
 }
