@@ -45,8 +45,7 @@ class Counter extends \yii\db\ActiveRecord
         ];
     }
 
-    public static function getCounterID( $num, $type ){
-        $tid = CtTypes::getTypeID($type);
+    public static function getCounterID( $num, $tid ){
         $c = Counter::find()->where(["num"=>$num, "type"=> $tid])->one();
         if ($c){
             $id = $c->id;

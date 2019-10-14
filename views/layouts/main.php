@@ -39,8 +39,14 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => 'Главная', 'url' => ['/site/index']],
-            ['label' => 'Файлы', 'url' => ['/uploadedfiles/index']],
-            ['label' => 'Счетчики', 'url' => ['/counter/index']],
+            ['label' => 'Файлы', 'url' => ['/uploadedfiles/index'],
+                'visible' => Yii::$app->user->can('admin'),],
+            ['label' => 'Счетчики', 'url' => ['/counter/index'],
+                'visible' => !Yii::$app->user->isGuest],
+            ['label' => 'Пользователи', 'url' => ['/user/index'],
+                'visible' => Yii::$app->user->can('admin')],
+            ['label' => 'Моя страница', 'url' => ['/user/home'],
+                'visible' => !Yii::$app->user->isGuest],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (

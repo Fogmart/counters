@@ -3,17 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Counter;
-use app\models\CounterSearch;
-use yii\filters\AccessControl;
+use app\models\User;
+use app\models\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * CounterController implements the CRUD actions for Counter model.
+ * UserController implements the CRUD actions for User model.
  */
-class CounterController extends Controller
+class UserController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -21,17 +20,6 @@ class CounterController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'actions'=>['index', 'delete','create','update', 'view'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-
-                ]
-            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -42,12 +30,12 @@ class CounterController extends Controller
     }
 
     /**
-     * Lists all Counter models.
+     * Lists all User models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new CounterSearch();
+        $searchModel = new UserSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -57,7 +45,7 @@ class CounterController extends Controller
     }
 
     /**
-     * Displays a single Counter model.
+     * Displays a single User model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -70,13 +58,13 @@ class CounterController extends Controller
     }
 
     /**
-     * Creates a new Counter model.
+     * Creates a new User model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Counter();
+        $model = new User();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -88,7 +76,7 @@ class CounterController extends Controller
     }
 
     /**
-     * Updates an existing Counter model.
+     * Updates an existing User model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -108,7 +96,7 @@ class CounterController extends Controller
     }
 
     /**
-     * Deletes an existing Counter model.
+     * Deletes an existing User model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -122,18 +110,32 @@ class CounterController extends Controller
     }
 
     /**
-     * Finds the Counter model based on its primary key value.
+     * Finds the User model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Counter the loaded model
+     * @return User the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Counter::findOne($id)) !== null) {
+        if (($model = User::findOne($id)) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    public function actionHome(){
+
+        $model = Yii::$app->user->identity;
+
+        if ($model->load(Yii::$app->request->post()) ) {
+            $model->save();
+        }
+
+        return $this->render('home', [
+            'model' => $model,
+        ]);
+    }
+
 }

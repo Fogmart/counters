@@ -55,7 +55,8 @@ class Uploadedfiles extends \yii\db\ActiveRecord
         $dt = explode(".", $dt);
 
         $v->whn = mktime(0, 0, 0, $dt[1] , $dt[2], $dt[0]);
-        $v->ctid = Counter::getCounterID($data[1], $data[2]);
+        $type = CtTypes::getTypeID($data[2]);
+        $v->ctid = Counter::getCounterID($data[1], $type);
         $v->val = str_replace(",",".", $data[3]);
         if (isset($data[5])) $v->val2 = str_replace(",",".", $data[5]);
         if (isset($data[7])) $v->val3 = str_replace(",",".", $data[7]);

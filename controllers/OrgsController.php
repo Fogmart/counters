@@ -3,17 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Counter;
-use app\models\CounterSearch;
-use yii\filters\AccessControl;
+use app\models\Orgs;
+use app\models\OrgsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * CounterController implements the CRUD actions for Counter model.
+ * OrgsController implements the CRUD actions for Orgs model.
  */
-class CounterController extends Controller
+class OrgsController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -21,17 +20,6 @@ class CounterController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'actions'=>['index', 'delete','create','update', 'view'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-
-                ]
-            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -42,12 +30,12 @@ class CounterController extends Controller
     }
 
     /**
-     * Lists all Counter models.
+     * Lists all Orgs models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new CounterSearch();
+        $searchModel = new OrgsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -57,7 +45,7 @@ class CounterController extends Controller
     }
 
     /**
-     * Displays a single Counter model.
+     * Displays a single Orgs model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -70,13 +58,13 @@ class CounterController extends Controller
     }
 
     /**
-     * Creates a new Counter model.
+     * Creates a new Orgs model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Counter();
+        $model = new Orgs();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -88,7 +76,7 @@ class CounterController extends Controller
     }
 
     /**
-     * Updates an existing Counter model.
+     * Updates an existing Orgs model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -108,7 +96,7 @@ class CounterController extends Controller
     }
 
     /**
-     * Deletes an existing Counter model.
+     * Deletes an existing Orgs model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -122,15 +110,15 @@ class CounterController extends Controller
     }
 
     /**
-     * Finds the Counter model based on its primary key value.
+     * Finds the Orgs model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Counter the loaded model
+     * @return Orgs the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Counter::findOne($id)) !== null) {
+        if (($model = Orgs::findOne($id)) !== null) {
             return $model;
         }
 

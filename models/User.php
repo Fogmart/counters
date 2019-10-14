@@ -41,6 +41,17 @@ class User extends ActiveRecord implements IdentityInterface
             TimestampBehavior::className(),
         ];
     }
+
+    public function attributeLabels()
+    {
+        return [
+            'username' => 'Логин',
+            'lname' => 'Фамилия',
+            'fname' => 'Имя',
+            'mname' => 'Отчество',
+        ];
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -182,5 +193,10 @@ class User extends ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+
+    public function getUsrCntrs()
+    {
+        return $this->hasMany(UsrCntr::className(), ['usrid' => 'id']);
     }
 }

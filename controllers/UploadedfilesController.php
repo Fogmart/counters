@@ -7,6 +7,7 @@ use app\models\CtTypes;
 use Yii;
 use app\models\Uploadedfiles;
 use app\models\UploadedfilesSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -22,6 +23,17 @@ class UploadedfilesController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions'=>['index', 'delete','create','update', 'view'],
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ],
+
+                ]
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
