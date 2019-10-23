@@ -9,6 +9,7 @@ use Yii;
  *
  * @property int $id
  * @property int $type
+ * @property int $addrid
  * @property string $num
  */
 class Counter extends \yii\db\ActiveRecord
@@ -29,6 +30,7 @@ class Counter extends \yii\db\ActiveRecord
         return [
             [['type', 'num'], 'required'],
             [['type'], 'integer'],
+            [['addrid'], 'integer'],
             [['num'], 'string', 'max' => 50],
         ];
     }
@@ -45,7 +47,7 @@ class Counter extends \yii\db\ActiveRecord
         ];
     }
 
-    public static function getCounterID( $num, $tid ){
+    public static function getCounterID( $num, $tid, $addrid){
         $c = Counter::find()->where(["num"=>$num, "type"=> $tid])->one();
         if ($c){
             $id = $c->id;
@@ -53,6 +55,7 @@ class Counter extends \yii\db\ActiveRecord
             $c = new Counter();
             $c->num = $num;
             $c->type = $tid;
+            $c->addrid = $addrid;
             $c->save();
             $id = $c->id;
         }

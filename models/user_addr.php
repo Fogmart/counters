@@ -5,19 +5,20 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "orgs".
+ * This is the model class for table "user_addr".
  *
  * @property int $id
- * @property int $name
+ * @property int $userid
+ * @property int $addrid
  */
-class Orgs extends \yii\db\ActiveRecord
+class user_addr extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'orgs';
+        return 'user_addr';
     }
 
     /**
@@ -26,8 +27,7 @@ class Orgs extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'required'],
-            [['name'], 'integer'],
+            [['userid', 'addrid'], 'integer'],
         ];
     }
 
@@ -38,7 +38,8 @@ class Orgs extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'userid' => 'Userid',
+            'addrid' => 'Addrid',
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Addr;
 use app\models\Counter;
 use app\models\CtTypes;
 use Yii;
@@ -27,7 +28,7 @@ class UploadedfilesController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions'=>['index', 'delete','create','update', 'view'],
+                        'actions'=>['index', 'delete','create','update', 'view', 'tst'],
                         'allow' => true,
                         'roles' => ['admin'],
                     ],
@@ -145,9 +146,23 @@ class UploadedfilesController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
+
     public function actionTst()
     {
-        print_r(CtTypes::getTypeID("SV"));
+//        $name = "123333_Peterburi_tee_101b_arvestite_naidud _2019_08_01_00_00.csv";
+////        $name = preg_replace('/[_\d+]+[.]csv/', "", $name);
+////        $name = preg_replace('/^\d+[_]/', "", $name);
+//        if (preg_match('/\d+/', $name, $match)){
+//            $name = $match[0];
+//        }
+//        echo $c = Addr::find()->where(["address"=>"Peterburi_tee_101b_arvestite_naidud ", "apartment"=> null])->exists();
+        $addr = Addr::find()->where(["id"=>17])->one();
+
+        foreach ($addr->counters as $one){
+            echo $one->addrid;
+            echo "<br>";
+        }
+
     }
 
 }

@@ -12,7 +12,21 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
+    <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'password')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'arr_adrs')->widget(\kartik\select2\Select2::classname(), [
+        'data' =>
+            \yii\helpers\ArrayHelper::map(\app\models\Addr::slctLst(), 'id', 'name'),
+        'language' => 'ru',
+        'options' => ['placeholder' => 'Выбрать адрес', 'multiple'=> true],
+        'pluginOptions' => [
+            'allowClear' => true
+        ],
+    ]);
+    ?>
+
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

@@ -4,6 +4,7 @@ use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 use yii\web\IdentityInterface;
 /**
  * User model
@@ -25,6 +26,9 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_DELETED = 0;
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
+
+    public $arr_adrs;
+    public $password;
     /**
      * {@inheritdoc}
      */
@@ -49,6 +53,9 @@ class User extends ActiveRecord implements IdentityInterface
             'lname' => 'Фамилия',
             'fname' => 'Имя',
             'mname' => 'Отчество',
+            'arr_adrs' => 'Адрес',
+            'password' => 'Пароль',
+            'email' => 'Почта',
         ];
     }
 
@@ -60,6 +67,11 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
+            [['arr_adrs'], 'safe'],
+            [['username'], 'string', 'max' => 250],
+            [['password_hash'], 'string', 'max' => 255],
+            [['password'], 'string', 'max' => 255],
+            [['email'], 'string', 'max' => 255],
         ];
     }
     /**
@@ -195,8 +207,47 @@ class User extends ActiveRecord implements IdentityInterface
         $this->password_reset_token = null;
     }
 
-    public function getUsrCntrs()
-    {
-        return $this->hasMany(UsrCntr::className(), ['usrid' => 'id']);
+
+    public function getAddr(){
+        return $this->hasMany(Addr::className(),['id'=>'addrid'])
+            ->viaTable('user_addr', ['userid'=>'id']);
     }
+
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+        $arr = ArrayHelper::map($this->addr, 'id', 'id');
+        if (($this->arr_adrs) ) {
+            foreach ($this->arr_adrs as $one) {
+                if (!in_array($one, $arr)) {
+                    $model = new user_addr();
+                    $model->addrid = $one;
+                    $model->userid = $this->id;
+                    $model->save();
+                }
+                if (isset($arr[$one])) {
+                    unset($arr[$one]);
+                }
+            }
+        }
+        foreach ($arr as $one){
+            $u = user_addr::find()->where(['addrid' => $one, 'userid'=> $this->id])->one();
+            $u->delete();
+        }
+    }
+
+    public function beforeSave($insert)
+    {
+        if (!$this->auth_key) $this->generateAuthKey();
+        if ($this->password) $this->password_hash = Yii::$app->security->generatePasswordHash($this->password);
+        return parent::beforeSave($insert);
+    }
+
+    public function afterFind()
+    {
+        parent::afterFind();
+        $this->arr_adrs = $this->addr;
+    }
+
 }

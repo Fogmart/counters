@@ -14,65 +14,21 @@ use yii\widgets\ActiveForm;
             Email: <b><?=$model->email?></b>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-4">
-            <?= $form->field($model, 'lname')->textInput(['maxlength' => true]) ?>
-        </div>
-        <div class="col-md-4">
-            <?= $form->field($model, 'fname')->textInput(['maxlength' => true]) ?>
-        </div>
-        <div class="col-md-4">
-            <?= $form->field($model, 'mname')->textInput(['maxlength' => true]) ?>
-        </div>
-    </div>
 
-    <div class="form-group">
-        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
-    </div>
-
-    <h3>Счетчики</h3>
-
-    <?php \yii\bootstrap\Modal::begin([
-        'id' => 'contact-modal',
-        'header' => '<h3>Добавление счетчика</h3>',
-        'closeButton' => ['tag' => 'button', 'label' => '&times;'],
-        'toggleButton' => [
-            'label' => 'Добавить',
-            'data-target' => '#contact-modal',
-            'class' => 'btn btn-success',
-//            'href' => Url::toRoute(['add-contact', 'partyID'=> $model->id]),
-        ],
-        'clientOptions' => false,
-    ]); ?>
-        <?= Html::input('text','num','',
-            ['class'=>'form-control']) ?>
-        <?= Html::dropDownList('type', null,
-            \yii\helpers\ArrayHelper::map(\app\models\CtTypes::find()->all(), "id", "name"),
-            ['class'=>'form-control', 'prompt'=>'']
-        )?>
-
-        <?= Html::button("Добавить", [ 'class' => 'btn btn-primary', 'onclick' => 'add();' ])?>
-
-
-
-    <?php \yii\bootstrap\Modal::end(); ?>
 
     <?php ActiveForm::end(); ?>
 
-    <div id="counters" style="margin-top: 50px">
-        <?php
-        foreach ($model->usrCntrs as $c) {?>
+    <h3>Счетчики</h3>
+
+    <div id="counters" >
+        <?php foreach ($model->addr as $addr) {?>
             <div>
-                <?if ($c->cntrid) {?>
-                    <?=Html::a($c->num, \yii\helpers\Url::to('/counter/view?id='.$c->cntrid, true) )?>
-                <?} else {?>
-                    <?=$c->num?>
+                <?=$addr->address . ' / ' . $addr->apartment?>
+                <?php foreach ($addr->counters as $c) {?>
+                    <div>
+                        <?=$c->num?> <?=$c->typeN->name?> <a href="/counter/view?id=<?=$c->id?>" target="_blank">...</a>
+                    </div>
                 <?} ?>
-                <?if ( Yii::$app->user->can('admin') && $c->cnfrmed != 1) {?>
-
-                    <?= Html::button("Подтвердить", [  'onclick' => 'cnfrm('.$c->id.');' ])?>
-                <?} ?>
-
             </div>
 
         <?} ?>

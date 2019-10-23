@@ -34,17 +34,32 @@ $this->params['breadcrumbs'][] = $this->title;
             'lname',
             'fname',
             'mname',
-            'role',
-            'homepageid',
-            'auth_key',
-            'password_hash',
-            'password_reset_token',
-            'email:email',
-            'status',
-            'created_at',
-            'updated_at',
-            'verification_token',
         ],
     ]) ?>
 
+    <div id="counters" style="margin-top: 50px">
+        <?php
+        foreach ($model->addr as $c) {?>
+            <div>
+
+            </div>
+
+        <?} ?>
+    </div>
+
 </div>
+
+<script>
+    function add() {
+        $.post('/usr-cntr/add',
+            {
+                "usrid":<?=$model->id?>,
+                "num": $("[name=num]").val(),
+                "type": $("[name=type]").val()
+            },
+            function( data ) {
+                document.location.reload()
+            });
+    }
+
+</script>
