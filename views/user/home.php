@@ -26,7 +26,11 @@ use yii\widgets\ActiveForm;
                 <?=$addr->address . ' / ' . $addr->apartment?>
                 <?php foreach ($addr->counters as $c) {?>
                     <div>
-                        <?=$c->num?> <?=$c->typeN->name?> <a href="/counter/view?id=<?=$c->id?>" target="_blank">...</a>
+                        <?=$c->num?>
+                        <?php if ($c->typeN->image) {?>
+                        <img src="<?=$c->typeN->image?>" class="ctimg">
+                        <?php } ?>
+                        <?=$c->typeN->name?> <a href="/counter/view?id=<?=$c->id?>" target="_blank">...</a>
                     </div>
                 <?} ?>
             </div>
@@ -59,3 +63,9 @@ use yii\widgets\ActiveForm;
             });
     }
 </script>
+
+<style>
+    .ctimg {
+        width: 50px;
+    }
+</style>

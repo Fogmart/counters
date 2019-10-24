@@ -56,6 +56,7 @@ class User extends ActiveRecord implements IdentityInterface
             'arr_adrs' => 'Адрес',
             'password' => 'Пароль',
             'email' => 'Почта',
+            'addrStr' => 'Адрес',
         ];
     }
 
@@ -249,5 +250,14 @@ class User extends ActiveRecord implements IdentityInterface
         parent::afterFind();
         $this->arr_adrs = $this->addr;
     }
+
+    public function getAddrStr(){
+        $res = "";
+        foreach ($this->addr as $a) {
+            $res .= $a->address . ( $a->apartment ? $a->apartment : "(весь дом)" );
+        }
+        return $res;
+    }
+
 
 }

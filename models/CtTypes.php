@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use http\Url;
 use Yii;
 
 /**
@@ -55,5 +56,9 @@ class CtTypes extends \yii\db\ActiveRecord
         }
         return $id;
 
+    }
+
+    public function getImage(){
+        return ($this->imgurl) ? \yii\helpers\Url::home(true)."/img/".$this->imgurl : "";
     }
 }
