@@ -21,51 +21,61 @@ use yii\widgets\ActiveForm;
     <h3>Счетчики</h3>
 
     <div id="counters" >
-        <?php foreach ($model->addr as $addr) {?>
-            <div>
-                <?=$addr->address . ' / ' . $addr->apartment?>
-                <?php foreach ($addr->counters as $c) {?>
-                    <div>
-                        <?=$c->num?>
-                        <?php if ($c->typeN->image) {?>
-                        <img src="<?=$c->typeN->image?>" class="ctimg">
-                        <?php } ?>
-                        <?=$c->typeN->name?> <a href="/counter/view?id=<?=$c->id?>" target="_blank">...</a>
-                    </div>
-                <?} ?>
+        <?php foreach ($model->addr as $i=>$addr) {?>
+            <div class="ctraddr">
+                <div class="addr"> <?=$addr->address . ' / ' . $addr->apartment?> </div>
+                <div class="ctrs">
+                    <?php foreach ($addr->counters as $c) {?>
+                        <div class="ctr">
+                            <?=$c->num?>
+                            <?php if ($c->typeN->image) {?>
+                            <img src="<?=$c->typeN->image?>" class="ctimg">
+                            <?php } ?>
+                            <?=$c->typeN->name?> <a href="/counter/view?id=<?=$c->id?>" target="_blank">...</a>
+                        </div>
+                    <?} ?>
+                </div>
             </div>
 
         <?} ?>
     </div>
 
 </div>
-
+<script src="/assets/8353b4a/jquery.js"></script>
 <script>
-    function add() {
-        $.post('/usr-cntr/add',
-            {
-                "usrid":<?=$model->id?>,
-                "num": $("[name=num]").val(),
-                "type": $("[name=type]").val()
-            },
-            function( data ) {
-                document.location.reload()
-            });
-    }
-
-    function cnfrm( id ) {
-        $.post('/usr-cntr/cnfrm',
-            {
-                "id": id
-            },
-            function( data ) {
-                document.location.reload()
-            });
-    }
+    $(function () {
+        $(".ctr").click( function () {
+            window.open($("a", $(this)).attr("href"));
+        })
+        $(".ctraddr").click(function () {
+            $(".ctrs", $(this)).slideToggle()
+        })
+        <?if ($i > 0) {?>
+        $(".ctrs").hide()
+        <?}?>
+    })
 </script>
 
 <style>
     .ctimg {
         width: 50px;
     }
+
+    .ctr {
+        border: 1px solid;
+        padding: 10px;
+
+    }
+    .ctr a {
+        display: none;
+    }
+
+    .ctraddr{
+        cursor: pointer;
+
+    }
+    .addr{
+        font-weight: bold;
+    }
+
 </style>

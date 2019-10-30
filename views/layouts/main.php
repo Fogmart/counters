@@ -42,7 +42,7 @@ AppAsset::register($this);
             ['label' => 'Файлы', 'url' => ['/uploadedfiles/index'],
                 'visible' => Yii::$app->user->can('admin'),],
             ['label' => 'Счетчики', 'url' => ['/counter/index'],
-                'visible' => !Yii::$app->user->isGuest],
+                'visible' => Yii::$app->user->can('admin'),],
             ['label' => 'Пользователи', 'url' => ['/user/index'],
                 'visible' => Yii::$app->user->can('admin')],
             ['label' => 'Моя страница', 'url' => ['/user/home'],

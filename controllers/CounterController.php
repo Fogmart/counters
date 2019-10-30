@@ -25,9 +25,14 @@ class CounterController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions'=>['index', 'delete','create','update', 'view'],
+                        'actions'=>['view'],
                         'allow' => true,
                         'roles' => ['@'],
+                    ],
+                    [
+                        'actions'=>['index', 'delete','create','update'],
+                        'allow' => true,
+                        'roles' => ['admin'],
                     ],
 
                 ]
