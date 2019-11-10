@@ -14,6 +14,8 @@ use Yii;
  */
 class Counter extends \yii\db\ActiveRecord
 {
+    public $begdt;
+    public $enddt;
     /**
      * {@inheritdoc}
      */
@@ -68,5 +70,11 @@ class Counter extends \yii\db\ActiveRecord
 
     public function getTypeN(){
         return $this->hasOne(CtTypes::className(), ['id'=>'type']);
+    }
+
+    public function getValsByPeriod(){
+        return CtVals::find()->where(["ctid"=>$this->id])
+            ->andWhere(['>=', "whn", $this->begdt])
+            ->andWhere(['<=', "whn", $this->enddt]) ->all();
     }
 }

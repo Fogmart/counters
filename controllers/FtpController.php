@@ -3,17 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Counter;
-use app\models\CounterSearch;
-use yii\filters\AccessControl;
+use app\models\Ftp;
+use app\models\FtpSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * CounterController implements the CRUD actions for Counter model.
+ * FtpController implements the CRUD actions for Ftp model.
  */
-class CounterController extends Controller
+class FtpController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -21,22 +20,6 @@ class CounterController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'actions'=>['view'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                    [
-                        'actions'=>['index', 'delete','create','update'],
-                        'allow' => true,
-                        'roles' => ['admin'],
-                    ],
-
-                ]
-            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -47,12 +30,12 @@ class CounterController extends Controller
     }
 
     /**
-     * Lists all Counter models.
+     * Lists all Ftp models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new CounterSearch();
+        $searchModel = new FtpSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -62,43 +45,26 @@ class CounterController extends Controller
     }
 
     /**
-     * Displays a single Counter model.
+     * Displays a single Ftp model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
-        date_default_timezone_set('UTC');
-        $c = $this->findModel($id);
-        if(Yii::$app->request->isPost) {
-            $begdt = Yii::$app->request->post("begdt");
-            $begdt = explode(".",$begdt);
-            $c->begdt = mktime(0, 0, 0, $begdt[1], $begdt[0], $begdt[2]);
-
-            $enddt = Yii::$app->request->post("enddt");
-            $enddt = explode(".",$enddt);
-            $c->enddt = mktime(0, 0, 0, $enddt[1], $enddt[0], $enddt[2]);
-        } else {
-            $c->begdt = strtotime(date('Y-m-01'));
-            $c->enddt = strtotime(date('Y-m-d'));
-        }
-
-
-
         return $this->render('view', [
-            'model' => $c,
+            'model' => $this->findModel($id),
         ]);
     }
 
     /**
-     * Creates a new Counter model.
+     * Creates a new Ftp model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Counter();
+        $model = new Ftp();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -110,7 +76,7 @@ class CounterController extends Controller
     }
 
     /**
-     * Updates an existing Counter model.
+     * Updates an existing Ftp model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -130,7 +96,7 @@ class CounterController extends Controller
     }
 
     /**
-     * Deletes an existing Counter model.
+     * Deletes an existing Ftp model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -144,20 +110,18 @@ class CounterController extends Controller
     }
 
     /**
-     * Finds the Counter model based on its primary key value.
+     * Finds the Ftp model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Counter the loaded model
+     * @return Ftp the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Counter::findOne($id)) !== null) {
+        if (($model = Ftp::findOne($id)) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-
-
 }

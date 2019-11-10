@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\Addr;
 use app\models\Counter;
 use app\models\CtTypes;
+use app\models\Ftp;
 use Yii;
 use app\models\Uploadedfiles;
 use app\models\UploadedfilesSearch;
@@ -12,6 +13,7 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * UploadedfilesController implements the CRUD actions for Uploadedfiles model.
@@ -32,6 +34,11 @@ class UploadedfilesController extends Controller
                         'allow' => true,
                         'roles' => ['admin'],
                     ],
+                    [
+                        'actions'=>['load-ftp'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ]
 
                 ]
             ],
@@ -147,22 +154,34 @@ class UploadedfilesController extends Controller
     }
 
 
-    public function actionTst()
+    public function actionLoadFtp()
     {
-//        $name = "123333_Peterburi_tee_101b_arvestite_naidud _2019_08_01_00_00.csv";
-////        $name = preg_replace('/[_\d+]+[.]csv/', "", $name);
-////        $name = preg_replace('/^\d+[_]/', "", $name);
-//        if (preg_match('/\d+/', $name, $match)){
-//            $name = $match[0];
-//        }
-//        echo $c = Addr::find()->where(["address"=>"Peterburi_tee_101b_arvestite_naidud ", "apartment"=> null])->exists();
-        $addr = Addr::find()->where(["id"=>17])->one();
-
-        foreach ($addr->counters as $one){
-            echo $one->addrid;
-            echo "<br>";
+        foreach (Ftp::getLst() as $ftp){
+            $conn_id = ftp_connect($ftp->ip);
+            if (ftp_login($conn_id, $ftp->user_name, $ftp->user_pass)) {
+                $contents = ftp_nlist($conn_id, ".");
+                foreach ($contents as $c) {
+                    if (in_array($c, array("./.", "./.."))) continue;
+                    $fname = str_replace("./", "", $c);
+                    if (!Uploadedfiles::isLoaded($fname)) {
+                        $local_file = str_replace("./", "../csv/", $c);
+                        ftp_get($conn_id, $local_file, $c, FTP_ASCII);
+                    }
+                }
+            }
+        }
+        $dir = "../csv/";
+        $cdir = scandir($dir);
+        $files = [];
+        foreach ($cdir as $value) {
+            if (!in_array($value,array(".", ".."))){
+                $files[] = $value;
+            }
         }
 
+        foreach ($files as $file){
+            Uploadedfiles::saveFile($file, $dir.$file);
+        }
     }
 
 }

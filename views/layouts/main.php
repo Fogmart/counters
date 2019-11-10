@@ -39,6 +39,8 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => 'Главная', 'url' => ['/site/index']],
+            ['label' => 'FTP', 'url' => ['/ftp/index'],
+                'visible' => Yii::$app->user->can('admin'),],
             ['label' => 'Файлы', 'url' => ['/uploadedfiles/index'],
                 'visible' => Yii::$app->user->can('admin'),],
             ['label' => 'Счетчики', 'url' => ['/counter/index'],
@@ -46,7 +48,7 @@ AppAsset::register($this);
             ['label' => 'Пользователи', 'url' => ['/user/index'],
                 'visible' => Yii::$app->user->can('admin')],
             ['label' => 'Моя страница', 'url' => ['/user/home'],
-                'visible' => !Yii::$app->user->isGuest],
+                'visible' => (!Yii::$app->user->isGuest && !Yii::$app->user->can('admin'))],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (

@@ -3,6 +3,9 @@
 use yii\helpers\Html;
 use miloschuman\highcharts\Highstock;
 use miloschuman\highcharts\SeriesDataHelper;
+use yii\widgets\ActiveForm;
+use \kartik\date\DatePicker;
+
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Counter */
@@ -17,11 +20,32 @@ date_default_timezone_set('UTC');
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-
-
     <p>Номер: <?=$model->num?></p>
     <p>Тип: <?=$model->typeN->name?></p>
 
+    <?php $form = ActiveForm::begin(); ?>
+    <div class="row">
+        <div class="col-md-10">
+        <?= DatePicker::widget([
+            'name' => 'begdt',
+            'value' => date('d.m.Y', $model->begdt),
+            'type' => DatePicker::TYPE_RANGE,
+            'name2' => 'enddt',
+            'value2' => date('d.m.Y', $model->enddt),
+            'pluginOptions' => [
+                'format' => 'dd.m.yyyy',
+                'todayHighlight' => true,
+                'autoclose'=>true,
+            ]
+        ]);
+        ?>
+        </div>
+        <div class="col-md-2">
+            <?= Html::submitButton('OK', ['class' => 'btn btn-success']) ?>
+        </div>
+    </div>
+
+    <?php ActiveForm::end(); ?>
 
     <?= Highstock::widget([
         'setupOptions' => [
@@ -59,7 +83,7 @@ date_default_timezone_set('UTC');
                 [
                     'type' => 'areaspline',
                     'name' => 'Результат',
-                    'data' => new SeriesDataHelper($model->vals, ['whn:timestamp', 'val:float']),
+                    'data' => new SeriesDataHelper($model->getValsByPeriod(), ['whn:timestamp', 'val:float']),
                     'yAxis' => 0,
                     'marker' => [
                         'enabled'=> true,
@@ -81,7 +105,9 @@ date_default_timezone_set('UTC');
             <th>Дата</th>
             <th>Значение</th>
         </tr >
-        <?php foreach ($model->vals as $i=>$v) {?>
+        <?php foreach ($model->getValsByPeriod() as $i=>$v) {
+            if ($i==0) $begval = $v->val;
+            ?>
             <tr >
                 <td><?=$i+1?></td>
                 <td><?=date (  'd.m.Y', $v->whn  ) ?></td>
@@ -89,6 +115,9 @@ date_default_timezone_set('UTC');
             </tr >
         <?php } ?>
     </table >
+    На начало: <b><?=$begval?></b>
+    На конец: <b><?=$v->val?></b>
+    Расход : <b><?=$v->val-$begval?></b>
 </div>
 
 <style>

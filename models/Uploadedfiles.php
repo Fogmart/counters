@@ -75,27 +75,33 @@ class Uploadedfiles extends \yii\db\ActiveRecord
     public static function saveFiles( $file ){
 
         for ($i=0; $i<count($file["name"]["file"]); $i++ ){
-            $name = $file["name"]["file"][$i];
-            $u = Uploadedfiles::find()->where(["name"=>$name])->exists();
-            if (!$u){
-                if (($handle = fopen($file["tmp_name"]["file"][$i], "r")) !== FALSE) {
-                    $row = 0;
-                    $addr = "123333_Peterburi_tee_101b_arvestite_naidud _2019_08_01_00_00.csv";
-                    $addr = preg_replace('/[_\d+]+[.]csv/', "", $name);
-                    $addr = preg_replace('/^\d+[_]/', "", $addr);
-
-                    while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
-                        $row++;
-                        if ($row > 1) Uploadedfiles::saveVals($data, $addr);
-                    }
-                    fclose($handle);
-                }
-                unlink($file["tmp_name"]["file"][$i]);
-                $model =  new Uploadedfiles();
-                $model->name = $name;
-                $model->save();
-            }
+            self::saveFile($file["name"]["file"][$i], $file["tmp_name"]["file"][$i]);
 
         }
+    }
+
+    public static function saveFile($fname, $floc){
+        $u = self::isLoaded($fname);
+        if (!$u){
+            if (($handle = fopen($floc, "r")) !== FALSE) {
+                $row = 0;
+                $addr = preg_replace('/[_\d+]+[.]csv/', "", $fname);
+                $addr = preg_replace('/^\d+[_]/', "", $addr);
+
+                while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
+                    $row++;
+                    if ($row > 1) Uploadedfiles::saveVals($data, $addr);
+                }
+                fclose($handle);
+            }
+            unlink($floc);
+            $model =  new Uploadedfiles();
+            $model->name = $fname;
+            $model->save();
+        }
+    }
+
+    public static function isLoaded($fname){
+        return Uploadedfiles::find()->where(["name"=>$fname])->exists();
     }
 }
