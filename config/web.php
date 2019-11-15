@@ -49,6 +49,7 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 'counter/<id:\d+>' => 'counter/view',
+                'uploadedfiles/addr/<a:.+>' => 'uploadedfiles/addr',
             ],
         ],
         'authManager' => [

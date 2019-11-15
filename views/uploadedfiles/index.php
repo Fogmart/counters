@@ -7,16 +7,12 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\UploadedfilesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Uploadedfiles';
+$this->title = 'Архив';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="uploadedfiles-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Create Uploadedfiles', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -28,7 +24,16 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'name',
             'whn',
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'attribute'=>'Resume',
+                'format' => 'raw',
+                'class' => 'yii\grid\DataColumn', // can be omitted, as it is the default
+                'value' => function ($data) {
+                    $url =  \yii\helpers\Url::home(true) . "loaded/".$data->name;
+                    return Html::a('<i class="glyphicon glyphicon-download-alt"></i>', $url);
+                },
+            ],
+
         ],
     ]); ?>
 

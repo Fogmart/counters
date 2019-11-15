@@ -35,7 +35,7 @@ class UploadedfilesController extends Controller
                         'roles' => ['admin'],
                     ],
                     [
-                        'actions'=>['load-ftp'],
+                        'actions'=>['load-ftp', 'addr'],
                         'allow' => true,
                         'roles' => ['@'],
                     ]
@@ -174,7 +174,7 @@ class UploadedfilesController extends Controller
         $cdir = scandir($dir);
         $files = [];
         foreach ($cdir as $value) {
-            if (!in_array($value,array(".", ".."))){
+            if (!in_array($value,array(".", "..", 'loaded'))){
                 $files[] = $value;
             }
         }
@@ -183,5 +183,19 @@ class UploadedfilesController extends Controller
             Uploadedfiles::saveFile($file, $dir.$file);
         }
     }
+
+    public function actionAddr($a){
+
+        $searchModel = new UploadedfilesSearch();
+        $searchModel->addr = $a;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+
+    }
+
 
 }

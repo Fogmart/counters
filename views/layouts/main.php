@@ -56,6 +56,11 @@ $usr = Yii::$app->user->identity;
                                             </ul>
                                         </li>
                                     <?php } ?>
+                                    <li>
+                                        <a href="/uploadedfiles/addr/<?=$ua?>">
+                                            Архив
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                         <?php } ?>

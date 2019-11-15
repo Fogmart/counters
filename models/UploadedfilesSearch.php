@@ -11,6 +11,7 @@ use app\models\Uploadedfiles;
  */
 class UploadedfilesSearch extends Uploadedfiles
 {
+    public $addr;
     /**
      * {@inheritdoc}
      */
@@ -63,6 +64,7 @@ class UploadedfilesSearch extends Uploadedfiles
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name]);
+        if ($this->addr) $query->andFilterWhere(['like', 'name', $this->addr]);
 
         return $dataProvider;
     }

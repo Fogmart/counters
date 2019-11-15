@@ -94,11 +94,14 @@ class Uploadedfiles extends \yii\db\ActiveRecord
                 }
                 fclose($handle);
             }
-            unlink($floc);
+//            unlink($floc);
+            rename($floc, "loaded/".$fname);
             $model =  new Uploadedfiles();
             $model->name = $fname;
             $model->save();
         }
+
+
     }
 
     public static function isLoaded($fname){
