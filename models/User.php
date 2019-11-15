@@ -259,5 +259,24 @@ class User extends ActiveRecord implements IdentityInterface
         return $res;
     }
 
+    public function getUsrAddrs(){
+        $res = [];
+        foreach ($this->addr as $a){
+            if (!in_array($a->address, $res)) $res[] = $a->address;
+        }
+        return $res;
+    }
+
+    public function getIsCompany(){
+        $res = false;
+        foreach ($this->addr as $a){
+            if (!$a->apartment) {
+                $res = true;
+                break;
+            }
+        }
+        return $res;
+    }
+
 
 }

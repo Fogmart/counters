@@ -47,6 +47,11 @@ date_default_timezone_set('UTC');
 
     <?php ActiveForm::end(); ?>
 
+    <?php
+    $vals = $model->getValsByPeriod();
+    if ($vals) {
+        ?>
+
     <?= Highstock::widget([
         'setupOptions' => [
             'lang' => [
@@ -83,7 +88,7 @@ date_default_timezone_set('UTC');
                 [
                     'type' => 'areaspline',
                     'name' => 'Результат',
-                    'data' => new SeriesDataHelper($model->getValsByPeriod(), ['whn:timestamp', 'val:float']),
+                    'data' => new SeriesDataHelper($vals, ['whn:timestamp', 'val:float']),
                     'yAxis' => 0,
                     'marker' => [
                         'enabled'=> true,
@@ -98,26 +103,29 @@ date_default_timezone_set('UTC');
         ]
     ]);?>
 
-    <h2>Показания</h2>
-    <table >
-        <tr >
-            <th>#</th>
-            <th>Дата</th>
-            <th>Значение</th>
-        </tr >
-        <?php foreach ($model->getValsByPeriod() as $i=>$v) {
-            if ($i==0) $begval = $v->val;
-            ?>
+
+
+        <h2>Показания</h2>
+        <table >
             <tr >
-                <td><?=$i+1?></td>
-                <td><?=date (  'd.m.Y', $v->whn  ) ?></td>
-                <td class="r"><?=$v->val?></td>
+                <th>#</th>
+                <th>Дата</th>
+                <th>Значение</th>
             </tr >
-        <?php } ?>
-    </table >
-    На начало: <b><?=$begval?></b>
-    На конец: <b><?=$v->val?></b>
-    Расход : <b><?=$v->val-$begval?></b>
+            <?php foreach ($vals as $i=>$v) {
+                if ($i==0) $begval = $v->val;
+                ?>
+                <tr >
+                    <td><?=$i+1?></td>
+                    <td><?=date (  'd.m.Y', $v->whn  ) ?></td>
+                    <td class="r"><?=$v->val?></td>
+                </tr >
+            <?php } ?>
+        </table >
+        На начало: <b><?=$begval?></b>
+        На конец: <b><?=$v->val?></b>
+        Расход : <b><?=$v->val-$begval?></b>
+    <?php } ?>
 </div>
 
 <style>

@@ -46,6 +46,7 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'counter/<id:\d+>' => 'counter/view',
             ],
         ],
         'authManager' => [

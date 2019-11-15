@@ -24,47 +24,70 @@ AppAsset::register($this);
     <?php $this->head() ?>
 </head>
 <body>
-<?php $this->beginBody() ?>
+<?php $this->beginBody();
+$usr = Yii::$app->user->identity;
+?>
 
 <div class="wrap">
-    <?php
-    NavBar::begin([
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            ['label' => 'Главная', 'url' => ['/site/index']],
-            ['label' => 'FTP', 'url' => ['/ftp/index'],
-                'visible' => Yii::$app->user->can('admin'),],
-            ['label' => 'Файлы', 'url' => ['/uploadedfiles/index'],
-                'visible' => Yii::$app->user->can('admin'),],
-            ['label' => 'Счетчики', 'url' => ['/counter/index'],
-                'visible' => Yii::$app->user->can('admin'),],
-            ['label' => 'Пользователи', 'url' => ['/user/index'],
-                'visible' => Yii::$app->user->can('admin')],
-            ['label' => 'Моя страница', 'url' => ['/user/home'],
-                'visible' => (!Yii::$app->user->isGuest && !Yii::$app->user->can('admin'))],
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
-            )
-        ],
-    ]);
-    NavBar::end();
-    ?>
+    <nav id="primary_nav_wrap">
+        <ul>
+            <?php if (Yii::$app->user->isGuest) { ?>
+                <li><span><a href="/site/login">Вход</a></span></li>
+            <?php }else {
+                if ($usr->isCompany) {
+                ?>
+                <li><span>Объект</span>
+                    <ul>
+                        <?php foreach ( $usr->usrAddrs as $ua ) {
+                            ?>
+                            <li><span><?=$ua?></span>
+                                <ul>
+                                    <?php foreach ( \app\models\Addr::getApartments($ua) as $a )
+                                        if ($a->apartment) { ?>
+                                        <li><span><?=$a->apartment?></span>
+                                            <ul>
+                                                <?php foreach ( $a->counters as $c ) { ?>
+                                                    <li><span>
+                                                            <a href="/counter/<?=$c->id?>">
+                                                                <?=$c->typeN->name?>
+                                                            </a>
+                                                        </span>
+                                                <?php } ?>
+                                            </ul>
+                                        </li>
+                                    <?php } ?>
+                                </ul>
+                            </li>
+                        <?php } ?>
+
+                    </ul>
+                </li>
+                <?php } else { ?>
+                    <li>
+                        <span><a href="/user/home">Моя страница</a></span>
+                    </li>
+                <?php }?>
+                <?php if (Yii::$app->user->can('admin') ){?>
+                    <li>
+                        <span>
+                            <a href="/user">Пользователи</a>
+
+                        </span>
+                    </li>
+                <?php }?>
+
+<!--                <li><span>Архив</span>-->
+<!--                    <ul></ul>-->
+<!--                </li>-->
+
+                <li><span><a href="/site/logout">Выход </a></span></li>
+            <?php } ?>
+
+
+        </ul>
+    </nav>
+
+
 
     <div class="container">
         <?= Breadcrumbs::widget([
@@ -74,6 +97,9 @@ AppAsset::register($this);
         <?= $content ?>
     </div>
 </div>
+
+
+
 
 <footer class="footer">
     <div class="container">

@@ -91,5 +91,9 @@ class Addr extends \yii\db\ActiveRecord
         return $res;
     }
 
+    public static function getApartments($addr){
+        return self::find()->where(['address'=>$addr]) ->orderBy('apartment')->all();
+    }
+
 
 }
