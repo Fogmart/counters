@@ -50,7 +50,7 @@ class Counter extends \yii\db\ActiveRecord
     }
 
     public static function getCounterID( $num, $tid, $addrid){
-        $c = Counter::find()->where(["num"=>$num, "type"=> $tid])->one();
+        $c = Counter::find()->where(["num"=>$num, "type"=> $tid, 'addrid'=>$addrid])->one();
         if ($c){
             $id = $c->id;
         }else{

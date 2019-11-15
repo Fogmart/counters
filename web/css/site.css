@@ -21,6 +21,8 @@ body {
     padding-top: 20px;
 }
 
+
+
 .jumbotron {
     text-align: center;
     background-color: transparent;
@@ -117,7 +119,13 @@ a.desc:after {
 
 #primary_nav_wrap
 {
-    margin-top:15px
+    padding-bottom:30px;
+    height: 60px;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+
+
+
 }
 
 #primary_nav_wrap ul

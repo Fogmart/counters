@@ -29,7 +29,9 @@ $usr = Yii::$app->user->identity;
 ?>
 
 <div class="wrap">
-    <nav id="primary_nav_wrap">
+
+
+    <nav id="primary_nav_wrap" class='header'>
         <ul>
             <?php if (Yii::$app->user->isGuest) { ?>
                 <li><span><a href="/site/login">Вход</a></span></li>
@@ -96,6 +98,8 @@ $usr = Yii::$app->user->identity;
 
         </ul>
     </nav>
+
+
 
 
 
