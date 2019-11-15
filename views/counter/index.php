@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\CounterSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Counters';
+$this->title = 'Счетчики';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="counter-index">

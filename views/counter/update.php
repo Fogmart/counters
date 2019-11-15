@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Counter */
 
-$this->title = 'Update Counter: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Counters', 'url' => ['index']];
+$this->title = 'Изменение счетчика: ' . $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Счетчики', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>

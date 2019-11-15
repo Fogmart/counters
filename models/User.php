@@ -242,6 +242,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         if (!$this->auth_key) $this->generateAuthKey();
         if ($this->password) $this->password_hash = Yii::$app->security->generatePasswordHash($this->password);
+        $this->status = self::STATUS_ACTIVE;
         return parent::beforeSave($insert);
     }
 

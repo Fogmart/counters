@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Ftp */
 
-$this->title = 'Update Ftp: ' . $model->id;
+$this->title = 'Изменение FTP: ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Ftps', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';

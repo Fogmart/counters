@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Ftp */
 
-$this->title = 'Create Ftp';
+$this->title = 'Добавление Ftp';
 $this->params['breadcrumbs'][] = ['label' => 'Ftps', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

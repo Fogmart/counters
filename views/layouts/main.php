@@ -74,7 +74,12 @@ $usr = Yii::$app->user->identity;
 
                         </span>
                     </li>
+                    <li>
+                        <span><a href="/ftp">FTP</a></span>
+                    </li>
+
                 <?php }?>
+
 
 <!--                <li><span>Архив</span>-->
 <!--                    <ul></ul>-->
