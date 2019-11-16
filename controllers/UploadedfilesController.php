@@ -35,10 +35,16 @@ class UploadedfilesController extends Controller
                         'roles' => ['admin'],
                     ],
                     [
-                        'actions'=>['load-ftp', 'addr'],
+                        'actions'=>[ 'addr'],
                         'allow' => true,
                         'roles' => ['@'],
+                    ],
+                    [
+                        'actions'=>['load-ftp'],
+                        'allow' => true,
+//                        'roles' => [''],
                     ]
+
 
                 ]
             ],
