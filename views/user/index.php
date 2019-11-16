@@ -40,7 +40,10 @@ $this->params['breadcrumbs'][] = $this->title;
             //'updated_at',
             //'verification_token',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                    'class' => 'yii\grid\ActionColumn',
+                    'template' => '{view} {update}'
+            ],
         ],
     ]); ?>
 
