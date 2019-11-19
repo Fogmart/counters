@@ -26,11 +26,14 @@ date_default_timezone_set('UTC');
     <?php $form = ActiveForm::begin(); ?>
     <div class="row">
         <div class="col-md-10">
-        <?= DatePicker::widget([
+        <?
+
+        echo  DatePicker::widget([
             'name' => 'begdt',
             'value' => date('d.m.Y', $model->begdt),
             'type' => DatePicker::TYPE_RANGE,
             'name2' => 'enddt',
+            'separator'=>'до',
             'value2' => date('d.m.Y', $model->enddt),
             'pluginOptions' => [
                 'format' => 'dd.m.yyyy',
@@ -118,12 +121,12 @@ date_default_timezone_set('UTC');
                         <?php if ($v->val2) {
                             $begval2 = $v->val2;
                             ?>
-                            <th >Дневное</th>
+                            <th >День</th>
                         <?php } ?>
                         <?php if ($v->val3) {
                             $begval3 = $v->val3;
                             ?>
-                            <th >Ночное</th>
+                            <th >Ночь</th>
                         <?php } ?>
                     </tr >
                 <?php } ?>
