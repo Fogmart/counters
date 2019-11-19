@@ -10,7 +10,7 @@ use \kartik\date\DatePicker;
 /* @var $this yii\web\View */
 /* @var $model app\models\Counter */
 
-$this->title = $model->id;
+$this->title = $model->typeN->name;
 //$this->params['breadcrumbs'][] = ['label' => 'Counters', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -107,24 +107,51 @@ date_default_timezone_set('UTC');
 
         <h2>Показания</h2>
         <table >
-            <tr >
-                <th>#</th>
-                <th>Дата</th>
-                <th>Значение</th>
-            </tr >
             <?php foreach ($vals as $i=>$v) {
-                if ($i==0) $begval = $v->val;
-                ?>
+                if ($i==0) {
+                    $begval = $v->val;
+                    ?>
+                    <tr >
+                        <th>#</th>
+                        <th>Дата</th>
+                        <th>Значение</th>
+                        <?php if ($v->val2) {
+                            $begval2 = $v->val2;
+                            ?>
+                            <th >Дневное</th>
+                        <?php } ?>
+                        <?php if ($v->val3) {
+                            $begval3 = $v->val3;
+                            ?>
+                            <th >Ночное</th>
+                        <?php } ?>
+                    </tr >
+                <?php } ?>
                 <tr >
                     <td><?=$i+1?></td>
                     <td><?=date (  'd.m.Y', $v->whn  ) ?></td>
                     <td class="r"><?=$v->val?></td>
+                    <?php if ($v->val2) {?>
+                        <td class="r"><?=$v->val2?></td>
+                    <?php } ?>
+                    <?php if ($v->val3) {?>
+                        <td class="r"><?=$v->val3?></td>
+                    <?php } ?>
                 </tr >
             <?php } ?>
         </table >
         На начало: <b><?=$begval?></b>
+        <?php if ($v->val2) {?>
+            (<?=$begval2?>/<?=$begval3?>)
+        <?php } ?>
         На конец: <b><?=$v->val?></b>
+        <?php if ($v->val2) {?>
+            (<?=$v->val2?>/<?=$v->val3?>)
+        <?php } ?>
         Расход : <b><?=$v->val-$begval?></b>
+        <?php if ($v->val2) {?>
+            (<?=$v->val2-$begval2?>/<?=$v->val3-$begval3?>)
+        <?php } ?>
     <?php } ?>
 </div>
 

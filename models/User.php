@@ -57,6 +57,7 @@ class User extends ActiveRecord implements IdentityInterface
             'password' => 'Пароль',
             'email' => 'Почта',
             'addrStr' => 'Адрес',
+            'company' => 'Компания',
         ];
     }
 
@@ -70,6 +71,7 @@ class User extends ActiveRecord implements IdentityInterface
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
             [['arr_adrs'], 'safe'],
             [['username'], 'string', 'max' => 250],
+            [['lname','fname','mname','company' ], 'string', 'max' => 250],
             [['password_hash'], 'string', 'max' => 255],
             [['password'], 'string', 'max' => 255],
             [['email'], 'string', 'max' => 255],

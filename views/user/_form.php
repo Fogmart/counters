@@ -16,6 +16,12 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
     <?= $form->field($model, 'password')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'lname')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'fname')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'mname')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'company')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'arr_adrs')->widget(\kartik\select2\Select2::classname(), [
         'data' =>
             \yii\helpers\ArrayHelper::map(\app\models\Addr::slctLst(), 'id', 'name'),
