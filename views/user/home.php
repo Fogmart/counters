@@ -31,7 +31,7 @@ use yii\widgets\ActiveForm;
                             <?php if ($c->typeN->image) {?>
                             <img src="<?=$c->typeN->image?>" class="ctimg">
                             <?php } ?>
-                            <?=$c->typeN->name?> <a href="/counter/view?id=<?=$c->id?>" target="_blank">...</a>
+                            <?=$c->typeN->name?> <a href="/counter/view?id=<?=$c->id?>" >...</a>
                         </div>
                     <?} ?>
                 </div>

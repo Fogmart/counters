@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'addrStr',
             'lname',
             'fname',
-            'mname',
+//            'mname',
             'company',
             //'role',
             //'homepageid',

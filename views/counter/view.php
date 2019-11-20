@@ -11,7 +11,7 @@ use \kartik\date\DatePicker;
 /* @var $model app\models\Counter */
 
 $this->title = $model->typeN->name;
-//$this->params['breadcrumbs'][] = ['label' => 'Counters', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Счетчики', 'url' => ['user/home']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 date_default_timezone_set('UTC');
@@ -74,7 +74,19 @@ date_default_timezone_set('UTC');
                 'printChart'=> 'Напечатать график'
             ],
         ],
+
         'options' => [
+            'rangeSelector'=>[
+                'buttons'=>[],
+                'inputEnabled'=>false,
+                'enabled'=>false
+            ],
+            'navigator'=>[
+              'enabled'=>false
+            ],
+            'credits'=>[
+                'enabled'=>false
+            ],
             'title' => ['text' => 'Показания'],
             'xAxis' => [
                 'type'=> 'date',
