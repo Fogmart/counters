@@ -69,7 +69,7 @@ class Addr extends \yii\db\ActiveRecord
 
     public function getCounters(){
         if ($this->apartment){
-            return $this->hasMany(Counter::className(),['addrid'=>'id']);
+            return $this->hasMany(Counter::className(),['addrid'=>'id'])->where('active = 1');
         } else {
             $res = [];
             foreach (Addr::find()->where(["address"=>$this->address])->all() as $addr){
