@@ -162,6 +162,7 @@ class UploadedfilesController extends Controller
 
     public function actionLoadFtp()
     {
+        set_time_limit(600);
         foreach (Ftp::getLst() as $ftp){
             $conn_id = ftp_connect($ftp->ip);
             if (ftp_login($conn_id, $ftp->user_name, $ftp->user_pass)) {

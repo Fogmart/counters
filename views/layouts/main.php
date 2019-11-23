@@ -82,8 +82,12 @@ $usr = Yii::$app->user->identity;
                         </span>
                     </li>
                     <li>
+                        <span><a href="/counter">Счетчики</a></span>
+                    </li>
+                    <li>
                         <span><a href="/ftp">FTP</a></span>
                     </li>
+
 
                 <?php }?>
 

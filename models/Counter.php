@@ -33,6 +33,7 @@ class Counter extends \yii\db\ActiveRecord
             [['type', 'num'], 'required'],
             [['type'], 'integer'],
             [['addrid'], 'integer'],
+            [['active'], 'integer'],
             [['num'], 'string', 'max' => 50],
         ];
     }
@@ -44,8 +45,10 @@ class Counter extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'type' => 'Type',
-            'num' => 'Num',
+            'typeN' => 'Тип',
+            'num' => 'Номер',
+            'active' => 'В работе',
+            'adress' => 'Адрес',
         ];
     }
 
@@ -71,6 +74,10 @@ class Counter extends \yii\db\ActiveRecord
     public function getTypeN(){
         return $this->hasOne(CtTypes::className(), ['id'=>'type']);
     }
+    public function getAdress(){
+        return $this->hasOne(Addr::className(), ['id'=>'addrid']);
+    }
+
 
     public function getValsByPeriod(){
         return CtVals::find()->where(["ctid"=>$this->id])

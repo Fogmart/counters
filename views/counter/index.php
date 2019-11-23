@@ -14,10 +14,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Create Counter', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
@@ -25,12 +21,26 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'type',
             'num',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'attribute' => 'typeN',
+                'format' => 'raw',
+                'value' => function($model) { return $model->typeN->name; },
+            ],
+            [
+                'attribute' => 'typeN',
+                'format' => 'raw',
+                'value' => function($model) { return $model->typeN->name; },
+            ],
+            [
+                'attribute' => 'adress',
+                'format' => 'raw',
+                'value' => function($model) { return $model->adress->address. "  ". $model->adress->apartment; },
+            ],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view} {update}'
+            ],
         ],
     ]); ?>
 

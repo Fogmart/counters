@@ -130,12 +130,12 @@ date_default_timezone_set('UTC');
                         <th>#</th>
                         <th>Дата</th>
                         <th>Значение</th>
-                        <?php if ($v->val2) {
+                        <?php if ($model->typeN->id == 4) {
                             $begval2 = $v->val2;
                             ?>
                             <th >День</th>
                         <?php } ?>
-                        <?php if ($v->val3) {
+                        <?php if ($model->typeN->id == 4) {
                             $begval3 = $v->val3;
                             ?>
                             <th >Ночь</th>
@@ -146,25 +146,25 @@ date_default_timezone_set('UTC');
                     <td><?=$i+1?></td>
                     <td><?=date (  'd.m.Y', $v->whn  ) ?></td>
                     <td class="r"><?=$v->val?></td>
-                    <?php if ($v->val2) {?>
+                    <?php if ($model->typeN->id == 4) {?>
                         <td class="r"><?=$v->val2?></td>
                     <?php } ?>
-                    <?php if ($v->val3) {?>
+                    <?php if ($model->typeN->id == 4) {?>
                         <td class="r"><?=$v->val3?></td>
                     <?php } ?>
                 </tr >
             <?php } ?>
         </table >
         На начало: <b><?=$begval?></b>
-        <?php if ($v->val2) {?>
+        <?php if ($model->typeN->id == 4) {?>
             (<?=$begval2?>/<?=$begval3?>)
         <?php } ?>
         На конец: <b><?=$v->val?></b>
-        <?php if ($v->val2) {?>
+        <?php if ($model->typeN->id == 4) {?>
             (<?=$v->val2?>/<?=$v->val3?>)
         <?php } ?>
         Расход : <b><?=$v->val-$begval?></b>
-        <?php if ($v->val2) {?>
+        <?php if ($model->typeN->id == 4) {?>
             (<?=$v->val2-$begval2?>/<?=$v->val3-$begval3?>)
         <?php } ?>
     <?php } ?>

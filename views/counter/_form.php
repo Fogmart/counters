@@ -12,9 +12,8 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'type')->textInput() ?>
 
-    <?= $form->field($model, 'num')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'active')->checkbox(["value"=>1]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
