@@ -29,6 +29,8 @@ class User extends ActiveRecord implements IdentityInterface
 
     public $arr_adrs;
     public $password;
+    public $no_after_save = false;
+    public  $langlst = ['ru', 'en', 'la'];
     /**
      * {@inheritdoc}
      */
@@ -48,17 +50,52 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function attributeLabels()
     {
-        return [
-            'username' => 'Логин',
-            'lname' => 'Фамилия',
-            'fname' => 'Имя',
-            'mname' => 'Отчество',
-            'arr_adrs' => 'Адрес',
-            'password' => 'Пароль',
-            'email' => 'Почта',
-            'addrStr' => 'Адрес',
-            'company' => 'Компания',
-        ];
+
+        $lang = Yii::$app->user->identity->lang;
+
+        if ($lang == 'ru')
+            return [
+                'username' => 'Логин',
+                'lname' => 'Фамилия',
+                'fname' => 'Имя',
+                'mname' => 'Отчество',
+                'arr_adrs' => 'Адрес',
+                'password' => 'Пароль',
+                'email' => 'Почта',
+                'addrStr' => 'Адрес',
+                'company' => 'Компания',
+                'lang' => 'Язык',
+            ];
+
+        if ($lang == 'en')
+            return [
+                'username' => 'Login',
+                'lname' => 'Last Name',
+                'fname' => 'First Name',
+                'mname' => 'MName',
+                'arr_adrs' => 'Adress',
+                'password' => 'Password',
+                'email' => 'Email',
+                'addrStr' => 'Adress',
+                'company' => 'Company',
+                'lang' => 'lang',
+            ];
+
+        if ($lang == 'lv')
+            return [
+                'username' => 'Логин',
+                'lname' => 'Фамилия',
+                'fname' => 'Имя',
+                'mname' => 'Отчество',
+                'arr_adrs' => 'Адрес',
+                'password' => 'Пароль',
+                'email' => 'Почта',
+                'addrStr' => 'Адрес',
+                'company' => 'Компания',
+                'lang' => 'Язык',
+            ];
+
+
     }
 
     /**
@@ -75,6 +112,7 @@ class User extends ActiveRecord implements IdentityInterface
             [['password_hash'], 'string', 'max' => 255],
             [['password'], 'string', 'max' => 255],
             [['email'], 'string', 'max' => 255],
+            [['lang'], 'string', 'max' => 10],
         ];
     }
     /**
@@ -220,6 +258,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function afterSave($insert, $changedAttributes)
     {
         parent::afterSave($insert, $changedAttributes);
+        if ($this->no_after_save) return;
         $arr = ArrayHelper::map($this->addr, 'id', 'id');
         if (($this->arr_adrs) ) {
             foreach ($this->arr_adrs as $one) {
@@ -281,5 +320,12 @@ class User extends ActiveRecord implements IdentityInterface
         return $res;
     }
 
+    public function setLang( $lang ){
+        $this->lang = $lang;
+        $this->no_after_save = true;
+        $this->save();
+    }
 
 }
+
+//ALTER TABLE `user` ADD `lang` VARCHAR(10) NULL DEFAULT 'ru' AFTER `verification_token`;

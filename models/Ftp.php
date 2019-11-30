@@ -41,13 +41,36 @@ class Ftp extends \yii\db\ActiveRecord
      */
     public function attributeLabels()
     {
-        return [
-            'id' => 'ID',
-            'ip' => 'Адрес',
-            'user_name' => 'Пользователь',
-            'user_pass' => 'Пароль',
-            'active' => 'в работе',
-        ];
+        $lang = Yii::$app->user->identity->lang;
+
+        if ($lang == 'ru')
+            return [
+                'id' => 'ID',
+                'ip' => 'Адрес',
+                'user_name' => 'Пользователь',
+                'user_pass' => 'Пароль',
+                'active' => 'в работе',
+            ];
+
+        if ($lang == 'en')
+            return [
+                'id' => 'ID',
+                'ip' => 'Aderess',
+                'user_name' => 'Username',
+                'user_pass' => 'Password',
+                'active' => 'Active',
+            ];
+
+        if ($lang == 'lv')
+            return [
+                'id' => 'ID',
+                'ip' => 'Адрес',
+                'user_name' => 'Пользователь',
+                'user_pass' => 'Пароль',
+                'active' => 'в работе',
+            ];
+
+
     }
 
     public static function getLst(){

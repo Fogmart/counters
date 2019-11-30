@@ -4,9 +4,10 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\User */
+$lang_arr = Yii::$app->params['lang'][Yii::$app->language];
 
-$this->title = 'Изменение Пользователя: ' . $model->username;
-$this->params['breadcrumbs'][] = ['label' => 'Пользователи', 'url' => ['index']];
+$this->title = $lang_arr['edtusr'].  ': ' . $model->username;
+$this->params['breadcrumbs'][] = ['label' => $lang_arr['usr'], 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->username, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>

@@ -18,7 +18,7 @@ use yii\web\UploadedFile;
 /**
  * UploadedfilesController implements the CRUD actions for Uploadedfiles model.
  */
-class UploadedfilesController extends Controller
+class UploadedfilesController extends LangController
 {
     /**
      * {@inheritdoc}

@@ -2,13 +2,15 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-    $this->title = "Редактирование своей информации";
+
+    $lang_arr = Yii::$app->params['lang'][Yii::$app->language];
+    $this->title = $lang_arr['home']
 ?>
 <div class="user-form">
     <?php $form = ActiveForm::begin();?>
     <div class="row" style="margin-bottom: 30px">
         <div class="col-md-4">
-            Имя пользователя: <b><?=$model->username?></b>
+            <?=$lang_arr['usrname']?>: <b><?=$model->username?></b>
         </div>
         <div class="col-md-4">
             Email: <b><?=$model->email?></b>
@@ -18,7 +20,7 @@ use yii\widgets\ActiveForm;
 
     <?php ActiveForm::end(); ?>
 
-    <h3>Счетчики</h3>
+    <h3><?=$lang_arr['ctr']?></h3>
 
     <div id="counters" >
         <?php foreach ($model->addr as $i=>$addr) {?>
@@ -41,7 +43,7 @@ use yii\widgets\ActiveForm;
     </div>
 
 </div>
-<script src="/assets/8353b4a/jquery.js"></script>
+<script src="/js/jquery.js"></script>
 <script>
     $(function () {
         $(".ctr").click( function () {

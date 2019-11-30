@@ -4,8 +4,8 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Ftp */
-
-$this->title = 'Добавление Ftp';
+$lang_arr = Yii::$app->params['lang'][Yii::$app->language];
+$this->title = $lang_arr['addftp'];
 $this->params['breadcrumbs'][] = ['label' => 'Ftps', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

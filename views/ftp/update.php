@@ -4,8 +4,8 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Ftp */
-
-$this->title = 'Изменение FTP: ' . $model->id;
+$lang_arr = Yii::$app->params['lang'][Yii::$app->language];
+$this->title = $lang_arr['edtftp'].': ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Ftps', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';

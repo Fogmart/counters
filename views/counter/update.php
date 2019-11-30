@@ -4,11 +4,11 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Counter */
-
-$this->title = 'Редактирование счетчика: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Счетчики', 'url' => ['index']];
+$lang_arr = Yii::$app->params['lang'][Yii::$app->language];
+$this->title = $lang_arr['ctredt'].': ' . $model->id;
+$this->params['breadcrumbs'][] = ['label' => $lang_arr['ctr'], 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'редактирование';
+$this->params['breadcrumbs'][] = $lang_arr['ctredt'];
 ?>
 <div class="counter-update">
 

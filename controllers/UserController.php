@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * UserController implements the CRUD actions for User model.
  */
-class UserController extends Controller
+class UserController extends LangController
 {
     /**
      * {@inheritdoc}
@@ -136,6 +136,13 @@ class UserController extends Controller
         return $this->render('home', [
             'model' => $model,
         ]);
+    }
+
+    public function actionSetLang(){
+        $model = Yii::$app->user->identity;
+        $lang = Yii::$app->request->post("lang");
+        $model->setLang($lang);
+        echo 1;
     }
 
 }

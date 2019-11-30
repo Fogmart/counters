@@ -25,7 +25,14 @@ AppAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody();
+
+
+
 $usr = Yii::$app->user->identity;
+
+$lang = Yii::$app->user->isGuest? 'ru' : $usr = Yii::$app->user->identity->lang;
+
+$lang_arr = Yii::$app->params['lang'][$lang];
 ?>
 
 <div class="wrap">
@@ -34,11 +41,11 @@ $usr = Yii::$app->user->identity;
     <nav id="primary_nav_wrap" class='header'>
         <ul>
             <?php if (Yii::$app->user->isGuest) { ?>
-                <li><span><a href="/site/login">Вход</a></span></li>
+                <li><span><a href="/site/login"><?=$lang_arr['in']?></a></span></li>
             <?php }else {
                 if ($usr->isCompany) {
                 ?>
-                <li><span>Объект</span>
+                <li><span><?=$lang_arr['obj']?></span>
                     <ul>
                         <?php foreach ( $usr->usrAddrs as $ua ) {
                             ?>
@@ -60,7 +67,7 @@ $usr = Yii::$app->user->identity;
                                     <?php } ?>
                                     <li>
                                         <a href="/uploadedfiles/addr/<?=$ua?>">
-                                            Архив
+                                            <?=$lang_arr['arc']?>
                                         </a>
                                     </li>
                                 </ul>
@@ -71,18 +78,18 @@ $usr = Yii::$app->user->identity;
                 </li>
                 <?php } else { ?>
                     <li>
-                        <span><a href="/user/home">Моя страница</a></span>
+                        <span><a href="/user/home"><?=$lang_arr['home']?></a></span>
                     </li>
                 <?php }?>
                 <?php if (Yii::$app->user->can('admin') ){?>
                     <li>
                         <span>
-                            <a href="/user">Пользователи</a>
+                            <a href="/user"><?=$lang_arr['usr']?></a>
 
                         </span>
                     </li>
                     <li>
-                        <span><a href="/counter">Счетчики</a></span>
+                        <span><a href="/counter"><?=$lang_arr['ctr']?></a></span>
                     </li>
                     <li>
                         <span><a href="/ftp">FTP</a></span>
@@ -96,11 +103,16 @@ $usr = Yii::$app->user->identity;
 <!--                    <ul></ul>-->
 <!--                </li>-->
 
-                <li><span><a href="/site/logout">Выход </a></span></li>
+                <li><span><a href="/site/logout"><?=$lang_arr['exit']?> </a></span></li>
             <?php } ?>
 
 
         </ul>
+        <select name="ulang" id="ulang" onchange="chnglang()">
+            <option value="ru" <?=$lang=='ru'?'selected':'' ?> >ru</option>
+            <option value="en" <?=$lang=='en'?'selected':'' ?>>en</option>
+
+        </select>
     </nav>
 
 
@@ -127,5 +139,13 @@ $usr = Yii::$app->user->identity;
 
 <?php $this->endBody() ?>
 </body>
+<script>
+    function chnglang() {
+        $.post('/user/set-lang',{lang:$("#ulang").val()}, function (data) { document.location.reload() });
+    }
+</script>
+
 </html>
 <?php $this->endPage() ?>
+
+

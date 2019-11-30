@@ -6,6 +6,7 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\models\Ftp */
 /* @var $form yii\widgets\ActiveForm */
+$lang_arr = Yii::$app->params['lang'][Yii::$app->language];
 ?>
 
 <div class="ftp-form">
@@ -21,7 +22,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'active')->checkbox(["value"=>1]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton($lang_arr['save'], ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

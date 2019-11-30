@@ -13,7 +13,7 @@ use yii\filters\VerbFilter;
 /**
  * CounterController implements the CRUD actions for Counter model.
  */
-class CounterController extends Controller
+class CounterController extends LangController
 {
     /**
      * {@inheritdoc}

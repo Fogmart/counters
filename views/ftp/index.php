@@ -6,7 +6,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\FtpSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-
+$lang_arr = Yii::$app->params['lang'][Yii::$app->language];
 $this->title = 'FTP';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Добавить FTP', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a($lang_arr['addftp'], ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>

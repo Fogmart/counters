@@ -6,8 +6,8 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\CounterSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-
-$this->title = 'Счетчики';
+$lang_arr = Yii::$app->params['lang'][Yii::$app->language];
+$this->title = $lang_arr['ctr'];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="counter-index">

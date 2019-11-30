@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * FtpController implements the CRUD actions for Ftp model.
  */
-class FtpController extends Controller
+class FtpController extends LangController
 {
     /**
      * {@inheritdoc}

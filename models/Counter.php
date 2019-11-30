@@ -43,13 +43,38 @@ class Counter extends \yii\db\ActiveRecord
      */
     public function attributeLabels()
     {
-        return [
-            'id' => 'ID',
-            'typeN' => 'Тип',
-            'num' => 'Номер',
-            'active' => 'В работе',
-            'adress' => 'Адрес',
-        ];
+
+        $lang = Yii::$app->user->identity->lang;
+
+        if ($lang == 'ru')
+            return [
+                'id' => 'ID',
+                'typeN' => 'Тип',
+                'num' => 'Номер',
+                'active' => 'В работе',
+                'adress' => 'Адрес',
+            ];
+
+        if ($lang == 'en')
+            return [
+                'id' => 'ID',
+                'typeN' => 'Type',
+                'num' => 'Number',
+                'active' => 'Active',
+                'adress' => 'Adress',
+            ];
+
+        if ($lang == 'lv')
+            return [
+                'id' => 'ID',
+                'typeN' => 'Тип',
+                'num' => 'Номер',
+                'active' => 'В работе',
+                'adress' => 'Адрес',
+            ];
+
+
+
     }
 
     public static function getCounterID( $num, $tid, $addrid){

@@ -9,9 +9,9 @@ use \kartik\date\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Counter */
-
+$lang_arr = Yii::$app->params['lang'][Yii::$app->language];
 $this->title = $model->typeN->name;
-$this->params['breadcrumbs'][] = ['label' => 'Счетчики', 'url' => ['user/home']];
+$this->params['breadcrumbs'][] = ['label' => $lang_arr['ctr'], 'url' => ['user/home']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 date_default_timezone_set('UTC');
@@ -20,8 +20,8 @@ date_default_timezone_set('UTC');
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Номер: <?=$model->num?></p>
-    <p>Тип: <?=$model->typeN->name?></p>
+    <p><?=$lang_arr['ctrnum']?>: <?=$model->num?></p>
+    <p><?=$lang_arr['ctrtype']?>: <?=$model->typeN->name?></p>
 
     <?php $form = ActiveForm::begin(); ?>
     <div class="row">
@@ -33,7 +33,7 @@ date_default_timezone_set('UTC');
             'value' => date('d.m.Y', $model->begdt),
             'type' => DatePicker::TYPE_RANGE,
             'name2' => 'enddt',
-            'separator'=>'до',
+            'separator'=>$lang_arr['datesep'],
             'value2' => date('d.m.Y', $model->enddt),
             'pluginOptions' => [
                 'format' => 'dd.m.yyyy',
@@ -59,19 +59,7 @@ date_default_timezone_set('UTC');
         'setupOptions' => [
             'lang' => [
                 'loading'=> 'Загрузка...',
-                'months'=> ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-                'weekdays'=> ["Воскресенье", "Понедельник", 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-                'shortMonths'=> ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
-                'exportButtonTitle'=> "Экспорт",
-                'printButtonTitle'=> "Печать",
-                'rangeSelectorFrom'=> 'С',
-                'rangeSelectorTo'=> "По",
-                'rangeSelectorZoom'=> "Период",
-                'downloadPNG'=> 'Скачать PNG',
-                'downloadJPEG'=> 'Скачать JPEG',
-                'downloadPDF'=> 'Скачать PDF',
-                'downloadSVG'=> 'Скачать SVG',
-                'printChart'=> 'Напечатать график'
+                'shortMonths'=> $lang_arr['shortMonths'],
             ],
         ],
 
@@ -87,17 +75,17 @@ date_default_timezone_set('UTC');
             'credits'=>[
                 'enabled'=>false
             ],
-            'title' => ['text' => 'Показания'],
+            'title' => ['text' => $lang_arr['ctrvals']],
             'xAxis' => [
                 'type'=> 'date',
                 'crosshair' => true,
                 'ordinal'=> false,
                 'title' => [
-                    'text' => 'Дата'
+                    'text' => $lang_arr['date']
                 ]
             ],
             'yAxis' => [
-                'title' => ['text' => 'Значение']
+                'title' => ['text' => $lang_arr['ctrval']]
             ],
             'series' => [
                 [
@@ -120,7 +108,7 @@ date_default_timezone_set('UTC');
 
 
 
-        <h2>Показания</h2>
+        <h2><?=$lang_arr['ctrvals']?></h2>
         <table >
             <?php foreach ($vals as $i=>$v) {
                 if ($i==0) {
@@ -128,17 +116,17 @@ date_default_timezone_set('UTC');
                     ?>
                     <tr >
                         <th>#</th>
-                        <th>Дата</th>
-                        <th>Значение</th>
+                        <th><?=$lang_arr['date']?></th>
+                        <th><?=$lang_arr['ctrval']?></th>
                         <?php if ($model->typeN->id == 4) {
                             $begval2 = $v->val2;
                             ?>
-                            <th >День</th>
+                            <th ><?=$lang_arr['ctrvalday']?></th>
                         <?php } ?>
                         <?php if ($model->typeN->id == 4) {
                             $begval3 = $v->val3;
                             ?>
-                            <th >Ночь</th>
+                            <th ><?=$lang_arr['ctrvalnight']?></th>
                         <?php } ?>
                     </tr >
                 <?php } ?>
@@ -155,15 +143,15 @@ date_default_timezone_set('UTC');
                 </tr >
             <?php } ?>
         </table >
-        На начало: <b><?=$begval?></b>
+        <?=$lang_arr['ctrvalbeg']?>: <b><?=$begval?></b>
         <?php if ($model->typeN->id == 4) {?>
             (<?=$begval2?>/<?=$begval3?>)
         <?php } ?>
-        На конец: <b><?=$v->val?></b>
+        <?=$lang_arr['ctrvalend']?>: <b><?=$v->val?></b>
         <?php if ($model->typeN->id == 4) {?>
             (<?=$v->val2?>/<?=$v->val3?>)
         <?php } ?>
-        Расход : <b><?=$v->val-$begval?></b>
+        <?=$lang_arr['ctrvaldif']?> : <b><?=$v->val-$begval?></b>
         <?php if ($model->typeN->id == 4) {?>
             (<?=$v->val2-$begval2?>/<?=$v->val3-$begval3?>)
         <?php } ?>
