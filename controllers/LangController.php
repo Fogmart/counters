@@ -15,7 +15,13 @@ class LangController extends Controller
 {
     public function beforeAction($action)
     {
-        $lang = Yii::$app->user->isGuest? 'ru' : $usr = Yii::$app->user->identity->lang;
+        $session = Yii::$app->session;
+        $lang = isset($_SESSION['lang']) ? $_SESSION['lang'] : 'ru';
+        if (Yii::$app->user->isGuest){
+        }else {
+            $lang = isset($_SESSION['lang']) ? $_SESSION['lang'] : Yii::$app->user->identity->lang;
+        }
+
         Yii::$app->language = $lang;
 
 

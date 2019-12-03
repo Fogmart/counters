@@ -6,8 +6,11 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+$session = Yii::$app->session;
+$lang = isset($_SESSION['lang']) ? $_SESSION['lang'] : 'ru';
+$lang_arr = Yii::$app->params['lang'][$lang];
 
-$this->title = 'Вход';
+$this->title = $lang_arr['in'];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
@@ -33,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <div class="form-group">
             <div class="col-lg-offset-1 col-lg-11">
-                <?= Html::submitButton('Вход', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                <?= Html::submitButton($lang_arr['in'], ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
             </div>
         </div>
 

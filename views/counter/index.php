@@ -26,14 +26,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'typeN',
                 'format' => 'raw',
                 'value' => function($model) { return $model->typeN->name; },
+                'filter' => \yii\helpers\ArrayHelper::map(\app\models\CtTypes::find()->all(), 'id', 'name'),
             ],
             [
-                'attribute' => 'typeN',
-                'format' => 'raw',
-                'value' => function($model) { return $model->typeN->name; },
-            ],
-            [
-                'attribute' => 'adress',
+                'attribute' => 'addrName',
                 'format' => 'raw',
                 'value' => function($model) { return $model->adress->address. "  ". $model->adress->apartment; },
             ],

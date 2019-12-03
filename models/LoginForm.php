@@ -37,16 +37,33 @@ class LoginForm extends Model
 
     public function attributeLabels()
     {
-        return [
-            'username' => 'Логин',
-            'lname' => 'Фамилия',
-            'fname' => 'Имя',
-            'mname' => 'Отчество',
-            'arr_adrs' => 'Адрес',
-            'password' => 'Пароль',
-            'email' => 'Почта',
-            'rememberMe' => 'Запомнить',
-        ];
+        $session = Yii::$app->session;
+        $lang = isset($_SESSION['lang']) ? $_SESSION['lang'] : 'ru';
+
+        if ($lang == 'ru')
+            return [
+                 'username' => 'Логин',
+                'lname' => 'Фамилия',
+                'fname' => 'Имя',
+                'mname' => 'Отчество',
+                'arr_adrs' => 'Адрес',
+                'password' => 'Пароль',
+                'email' => 'Почта',
+                'rememberMe' => 'Запомнить',
+            ];
+        if ($lang == 'en')
+            return [
+                'username' => 'Username',
+                'password' => 'Password',
+                'email' => 'Почта',
+                'rememberMe' => 'Remember Me',
+            ];
+        if ($lang == 'lv')
+            return [
+                 'username' => 'Логин',
+                'password' => 'Пароль',
+                'rememberMe' => 'Запомнить',
+            ];
     }
 
     /**

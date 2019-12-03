@@ -29,8 +29,13 @@ AppAsset::register($this);
 
 
 $usr = Yii::$app->user->identity;
+if (Yii::$app->user->isGuest){
+    $session = Yii::$app->session;
+    $lang = isset($_SESSION['lang']) ? $_SESSION['lang'] : 'ru';
+}else {
+    $lang = isset($_SESSION['lang']) ? $_SESSION['lang'] : Yii::$app->user->identity->lang;
+}
 
-$lang = Yii::$app->user->isGuest? 'ru' : $usr = Yii::$app->user->identity->lang;
 
 $lang_arr = Yii::$app->params['lang'][$lang];
 ?>
@@ -109,8 +114,9 @@ $lang_arr = Yii::$app->params['lang'][$lang];
 
         </ul>
         <select name="ulang" id="ulang" onchange="chnglang()">
-            <option value="ru" <?=$lang=='ru'?'selected':'' ?> >ru</option>
+            <option value="ru" <?=$lang=='ru'?'selected':'' ?>>ru</option>
             <option value="en" <?=$lang=='en'?'selected':'' ?>>en</option>
+            <option value="lv" <?=$lang=='lv'?'selected':'' ?>>lv</option>
 
         </select>
     </nav>

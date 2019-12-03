@@ -16,6 +16,7 @@ class Counter extends \yii\db\ActiveRecord
 {
     public $begdt;
     public $enddt;
+    public $addrName;
     /**
      * {@inheritdoc}
      */
@@ -53,6 +54,7 @@ class Counter extends \yii\db\ActiveRecord
                 'num' => 'Номер',
                 'active' => 'В работе',
                 'adress' => 'Адрес',
+                'addrName' => 'Адрес',
             ];
 
         if ($lang == 'en')
@@ -62,6 +64,7 @@ class Counter extends \yii\db\ActiveRecord
                 'num' => 'Number',
                 'active' => 'Active',
                 'adress' => 'Adress',
+                'addrName' => 'Adress',
             ];
 
         if ($lang == 'lv')
@@ -71,6 +74,7 @@ class Counter extends \yii\db\ActiveRecord
                 'num' => 'Номер',
                 'active' => 'В работе',
                 'adress' => 'Адрес',
+                'addrName' => 'Адрес',
             ];
 
 

@@ -139,9 +139,14 @@ class UserController extends LangController
     }
 
     public function actionSetLang(){
-        $model = Yii::$app->user->identity;
-        $lang = Yii::$app->request->post("lang");
-        $model->setLang($lang);
+        if (Yii::$app->user->isGuest){
+            $session = Yii::$app->session;
+            $session->set('lang', Yii::$app->request->post("lang"));
+        }else {
+            $model = Yii::$app->user->identity;
+            $lang = Yii::$app->request->post("lang");
+            $model->setLang($lang);
+        }
         echo 1;
     }
 

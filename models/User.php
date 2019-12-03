@@ -329,3 +329,4 @@ class User extends ActiveRecord implements IdentityInterface
 }
 
 //ALTER TABLE `user` ADD `lang` VARCHAR(10) NULL DEFAULT 'ru' AFTER `verification_token`;
+

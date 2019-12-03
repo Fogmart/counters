@@ -47,7 +47,7 @@ return [
         'en'=>[
             'obj' => 'Object',
             'usr' => 'Users',
-            'ctr' => 'Counters',
+            'ctr' => 'Meters',
             'in' => 'Enter',
             'exit' => 'Exit',
             'arc' => 'Archive',
@@ -81,8 +81,46 @@ return [
             'ctrvalday' => "Day",
             'ctrvalnight' => "Night",
 
-            'ctredt' => "Edit Counter",
-            'ctradd' => "Edit Counter",
-        ]
+            'ctredt' => "Edit Meters",
+            'ctradd' => "Edit Meters",
+        ],
+        'lv'=>[
+            'obj' => 'Объект',
+            'usr' => 'Kasutajad',
+            'ctr' => 'Arvestid',
+            'in' => 'Sisene',
+            'exit' => 'Välju',
+            'arc' => 'Arhiiv',
+            'home' => 'Minu leht',
+
+            'add' => 'Lisa',
+            'edit' => 'Muuda',
+            'del' => 'Kustuta',
+            'save' => 'Salvesta',
+
+            'addusr' => 'Lisa kasutaja',
+            'edtusr' => 'Muda kasutaja',
+            'usrname'=> 'Kasutaja nimi',
+
+            'date' => "Data",
+            'datesep' => "kuni",
+            'shortMonths'=> ['Jaanuar', 'Veebruar', 'Märts', 'Aprill', 'Mai', 'Juuni',
+                'Juuli', 'August', 'September', 'Oktoober', 'November', 'Detsember'],
+
+            'ctrnum' => "Номер",
+            'ctrtype' => "Тип",
+            'ctrvals' => "Показания",
+            'ctrval' => "Значение",
+            'ctrvalbeg' => "На начало",
+            'ctrvalend' => "На конец",
+            'ctrvaldif' => "Расход",
+            'ctrvalday' => "День",
+            'ctrvalnight' => "Ночь",
+
+            'ctredt' => "Редактирование счетчика",
+            'ctradd' => "Добавить счетчик",
+        ],
+
+
     ]
 ];
