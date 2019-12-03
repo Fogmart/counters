@@ -84,7 +84,7 @@ return [
             'ctredt' => "Edit Meters",
             'ctradd' => "Edit Meters",
         ],
-        'lv'=>[
+        'et'=>[
             'obj' => 'Объект',
             'usr' => 'Kasutajad',
             'ctr' => 'Arvestid',
