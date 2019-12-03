@@ -25,8 +25,8 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'typeN',
                 'format' => 'raw',
-                'value' => function($model) { return $model->typeN->name; },
-                'filter' => \yii\helpers\ArrayHelper::map(\app\models\CtTypes::find()->all(), 'id', 'name'),
+                'value' => function($model) { return $model->typeN->namelang; },
+                'filter' => \yii\helpers\ArrayHelper::map(\app\models\CtTypes::find()->all(), 'id', 'namelang'),
             ],
             [
                 'attribute' => 'addrName',

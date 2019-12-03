@@ -61,4 +61,35 @@ class CtTypes extends \yii\db\ActiveRecord
     public function getImage(){
         return ($this->imgurl) ? \yii\helpers\Url::home(true)."/img/".$this->imgurl : "";
     }
+
+    public function getNamelang(){
+        $lang = Yii::$app->language;
+        if ($lang == 'ru')
+            $name_arr = [
+                '1' => 	'холодная вода',
+                '2' => 	'горячая вода',
+                '3' => 	'теплосчетчик',
+                '4' => 	'электросчетчик',
+                '5' => 	'вода',
+            ];
+        if ($lang == 'en')
+            $name_arr = [
+                '1' => 	'cold water',
+                '2' => 	'hot water',
+                '3' => 	'heat',
+                '4' => 	'electro',
+                '5' => 	'water',
+            ];
+        if ($lang == 'lv')
+            $name_arr = [
+                '1' => 	'холодная вода',
+                '2' => 	'горячая вода',
+                '3' => 	'теплосчетчик',
+                '4' => 	'электросчетчик',
+                '5' => 	'вода',
+            ];
+
+
+        return $name_arr[$this->id];
+    }
 }
