@@ -81,7 +81,7 @@ class User extends ActiveRecord implements IdentityInterface
                 'lang' => 'lang',
             ];
 
-        if ($lang == 'lv')
+        if ($lang == 'et')
             return [
                 'username' => 'Логин',
                 'lname' => 'Фамилия',

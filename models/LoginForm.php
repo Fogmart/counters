@@ -58,11 +58,11 @@ class LoginForm extends Model
                 'email' => 'Почта',
                 'rememberMe' => 'Remember Me',
             ];
-        if ($lang == 'lv')
+        if ($lang == 'et')
             return [
-                 'username' => 'Логин',
-                'password' => 'Пароль',
-                'rememberMe' => 'Запомнить',
+                 'username' => 'kasutaja',
+                'password' => 'parool',
+                'rememberMe' => 'jätta meelde',
             ];
     }
 

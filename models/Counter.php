@@ -67,7 +67,7 @@ class Counter extends \yii\db\ActiveRecord
                 'addrName' => 'Adress',
             ];
 
-        if ($lang == 'lv')
+        if ($lang == 'et')
             return [
                 'id' => 'ID',
                 'typeN' => 'Тип',

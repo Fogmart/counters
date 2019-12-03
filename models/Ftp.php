@@ -61,7 +61,7 @@ class Ftp extends \yii\db\ActiveRecord
                 'active' => 'Active',
             ];
 
-        if ($lang == 'lv')
+        if ($lang == 'et')
             return [
                 'id' => 'ID',
                 'ip' => 'Адрес',

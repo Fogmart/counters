@@ -80,15 +80,14 @@ class CtTypes extends \yii\db\ActiveRecord
                 '4' => 	'electro',
                 '5' => 	'water',
             ];
-        if ($lang == 'lv')
+        if ($lang == 'et')
             $name_arr = [
-                '1' => 	'холодная вода',
-                '2' => 	'горячая вода',
-                '3' => 	'теплосчетчик',
-                '4' => 	'электросчетчик',
-                '5' => 	'вода',
+                '1' => 	'külm vesi',
+                '2' => 	'soe vesi',
+                '3' => 	'soojusarvesti',
+                '4' => 	'elektriarvesti',
+                '5' => 	'vesi',
             ];
-
 
         return $name_arr[$this->id];
     }

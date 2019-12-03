@@ -116,7 +116,7 @@ $lang_arr = Yii::$app->params['lang'][$lang];
         <select name="ulang" id="ulang" onchange="chnglang()">
             <option value="ru" <?=$lang=='ru'?'selected':'' ?>>ru</option>
             <option value="en" <?=$lang=='en'?'selected':'' ?>>en</option>
-            <option value="lv" <?=$lang=='lv'?'selected':'' ?>>lv</option>
+            <option value="et" <?=$lang=='et'?'selected':'' ?>>et</option>
 
         </select>
     </nav>
