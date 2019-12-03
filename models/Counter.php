@@ -86,6 +86,7 @@ class Counter extends \yii\db\ActiveRecord
         if ($c){
             $id = $c->id;
         }else{
+            if (($num = "0")  || (strlen($num ) > 8) ) return null;
             $c = new Counter();
             $c->num = $num;
             $c->type = $tid;

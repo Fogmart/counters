@@ -66,10 +66,12 @@ class Uploadedfiles extends \yii\db\ActiveRecord
         $addrid = Addr::getAddrID($addr, $apartment);
 
         $v->ctid = Counter::getCounterID($data[1], $type, $addrid);
-        $v->val = str_replace(",",".", $data[3]);
-        if (isset($data[5])) $v->val2 = str_replace(",",".", $data[5]);
-        if (isset($data[7])) $v->val3 = str_replace(",",".", $data[7]);
-        $v->check();
+        if ($v->ctid) {
+            $v->val = str_replace(",", ".", $data[3]);
+            if (isset($data[5])) $v->val2 = str_replace(",", ".", $data[5]);
+            if (isset($data[7])) $v->val3 = str_replace(",", ".", $data[7]);
+            $v->check();
+        }
     }
 
     public static function saveFiles( $file ){
