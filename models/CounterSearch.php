@@ -64,9 +64,11 @@ class CounterSearch extends Counter
         ];
 
 //        $this->load($params);
-        $this->num = $params["CounterSearch"]["num"];
-        $this->type = $params["CounterSearch"]["typeN"];
-        $this->addrName = $params["CounterSearch"]["addrName"];
+        if (isset($params["CounterSearch"])){
+            $this->num = $params["CounterSearch"]["num"];
+            $this->type = $params["CounterSearch"]["typeN"];
+            $this->addrName = $params["CounterSearch"]["addrName"];
+        }
 
         if (!$this->validate()) {
             return $dataProvider;
