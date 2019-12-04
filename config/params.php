@@ -107,20 +107,18 @@ return [
             'shortMonths'=> ['Jaanuar', 'Veebruar', 'Märts', 'Aprill', 'Mai', 'Juuni',
                 'Juuli', 'August', 'September', 'Oktoober', 'November', 'Detsember'],
 
-            'ctrnum' => "Номер",
-            'ctrtype' => "Тип",
-            'ctrvals' => "Показания",
+            'ctrnum' => "number",
+            'ctrtype' => "Tüüp",
+            'ctrvals' => "Näit",
             'ctrval' => "Значение",
-            'ctrvalbeg' => "На начало",
-            'ctrvalend' => "На конец",
-            'ctrvaldif' => "Расход",
-            'ctrvalday' => "День",
-            'ctrvalnight' => "Ночь",
+            'ctrvalbeg' => "algus",
+            'ctrvalend' => "lõpp",
+            'ctrvaldif' => "kulu",
+            'ctrvalday' => "päev",
+            'ctrvalnight' => "öö",
 
-            'ctredt' => "Редактирование счетчика",
-            'ctradd' => "Добавить счетчик",
+            'ctredt' => "arvesti andmed",
+            'ctradd' => "arvesti lisamine",
         ],
-
-
     ]
 ];

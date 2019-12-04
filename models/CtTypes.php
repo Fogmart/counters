@@ -77,7 +77,7 @@ class CtTypes extends \yii\db\ActiveRecord
                 '1' => 	'cold water',
                 '2' => 	'hot water',
                 '3' => 	'heat',
-                '4' => 	'electro',
+                '4' => 	'electricity',
                 '5' => 	'water',
             ];
         if ($lang == 'et')

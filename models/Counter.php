@@ -70,14 +70,12 @@ class Counter extends \yii\db\ActiveRecord
         if ($lang == 'et')
             return [
                 'id' => 'ID',
-                'typeN' => 'Тип',
-                'num' => 'Номер',
-                'active' => 'В работе',
-                'adress' => 'Адрес',
-                'addrName' => 'Адрес',
+                'typeN' => 'tüüp',
+                'num' => 'number',
+                'active' => 'töös',
+                'adress' => 'aadress',
+                'addrName' => 'aadress',
             ];
-
-
 
     }
 

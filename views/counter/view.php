@@ -10,7 +10,7 @@ use \kartik\date\DatePicker;
 /* @var $this yii\web\View */
 /* @var $model app\models\Counter */
 $lang_arr = Yii::$app->params['lang'][Yii::$app->language];
-$this->title = $model->typeN->name;
+$this->title = $model->typeN->namelang;
 $this->params['breadcrumbs'][] = ['label' => $lang_arr['ctr'], 'url' => ['user/home']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);

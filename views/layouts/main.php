@@ -63,7 +63,7 @@ $lang_arr = Yii::$app->params['lang'][$lang];
                                                 <?php foreach ( $a->counters as $c ) { ?>
                                                     <li><span>
                                                             <a href="/counter/<?=$c->id?>">
-                                                                <?=$c->typeN->name?>
+                                                                <?=$c->typeN->namelang?>
                                                             </a>
                                                         </span>
                                                 <?php } ?>

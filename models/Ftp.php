@@ -64,12 +64,11 @@ class Ftp extends \yii\db\ActiveRecord
         if ($lang == 'et')
             return [
                 'id' => 'ID',
-                'ip' => 'Адрес',
-                'user_name' => 'Пользователь',
-                'user_pass' => 'Пароль',
+                'ip' => 'aadress',
+                'user_name' => 'kasutaja nimi',
+                'user_pass' => 'kasutaja',
                 'active' => 'в работе',
             ];
-
 
     }
 
