@@ -21,7 +21,7 @@ date_default_timezone_set('UTC');
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p><?=$lang_arr['ctrnum']?>: <?=$model->num?></p>
-    <p><?=$lang_arr['ctrtype']?>: <?=$model->typeN->name?></p>
+    <p><?=$lang_arr['ctrtype']?>: <?=$model->typeN->namelang?></p>
 
     <?php $form = ActiveForm::begin(); ?>
     <div class="row">
