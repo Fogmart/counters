@@ -83,9 +83,11 @@ class Addr extends \yii\db\ActiveRecord
     }
 
     public static function slctLst(){
+        $lang = isset($_SESSION['lang']) ? $_SESSION['lang'] : Yii::$app->user->identity->lang;
+
         $res = [];
         foreach (self::find()->orderBy('address')->all() as $one){
-            $app = ($one->apartment) ? $one->apartment : 'Все квартиры';
+            $app = ($one->apartment) ? $one->apartment : Yii::$app->params['lang'][$lang]['allapartaments'];
             $res[] = ['id'=> $one->id, 'name'=> $one->address .' / ' . $app];
         }
         return $res;

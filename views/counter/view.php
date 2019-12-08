@@ -69,6 +69,9 @@ date_default_timezone_set('UTC');
                 'inputEnabled'=>false,
                 'enabled'=>false
             ],
+            'tooltip' => [
+                'enabled' => false
+            ],
             'navigator'=>[
               'enabled'=>false
             ],

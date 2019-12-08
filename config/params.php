@@ -40,6 +40,7 @@ return [
 
             'ctredt' => "Редактирование счетчика",
             'ctradd' => "Добавить счетчик",
+            'allapartaments' => 'все квартиры',
 
 
 
@@ -83,6 +84,7 @@ return [
 
             'ctredt' => "Edit Meters",
             'ctradd' => "Edit Meters",
+            'allapartaments' => 'all apartaments',
         ],
         'et'=>[
             'obj' => 'Объект',
@@ -119,6 +121,7 @@ return [
 
             'ctredt' => "arvesti andmed",
             'ctradd' => "arvesti lisamine",
+            'allapartaments' => 'kõik korterid',
         ],
     ]
 ];

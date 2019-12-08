@@ -7,7 +7,9 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\UploadedfilesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Архив';
+$lang_arr = Yii::$app->params['lang'][Yii::$app->language];
+$this->title = $lang_arr['arc'];
+
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="uploadedfiles-index">
