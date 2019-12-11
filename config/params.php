@@ -87,7 +87,7 @@ return [
             'allapartaments' => 'all apartaments',
         ],
         'et'=>[
-            'obj' => 'Объект',
+            'obj' => 'Objekt',
             'usr' => 'Kasutajad',
             'ctr' => 'Arvestid',
             'in' => 'Sisene',
@@ -112,7 +112,7 @@ return [
             'ctrnum' => "number",
             'ctrtype' => "Tüüp",
             'ctrvals' => "Näit",
-            'ctrval' => "Значение",
+            'ctrval' => "näit",
             'ctrvalbeg' => "algus",
             'ctrvalend' => "lõpp",
             'ctrvaldif' => "kulu",
