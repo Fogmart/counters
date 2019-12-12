@@ -5,8 +5,11 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\User */
 
-$this->title = 'Добавить пользователя';
-$this->params['breadcrumbs'][] = ['label' => 'Пользователи', 'url' => ['index']];
+$lang_arr = Yii::$app->params['lang'][Yii::$app->language];
+
+$this->title = $lang_arr['addusr'];
+
+$this->params['breadcrumbs'][] = ['label' => $lang_arr['usr'], 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-create">
