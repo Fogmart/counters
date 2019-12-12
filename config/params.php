@@ -63,9 +63,6 @@ return [
             'edtusr' => 'Edit User',
             'usrname'=> 'User name',
 
-            'addftp' => 'Add FTP',
-            'edtftp' => 'Edit FTP',
-            'delftp'=> 'Delete FTP',
 
 
             'date' => "Date",
@@ -103,6 +100,8 @@ return [
             'addusr' => 'Lisa kasutaja',
             'edtusr' => 'Muda kasutaja',
             'usrname'=> 'Kasutaja nimi',
+
+
 
             'date' => "Data",
             'datesep' => "kuni",

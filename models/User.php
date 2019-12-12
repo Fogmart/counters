@@ -83,16 +83,16 @@ class User extends ActiveRecord implements IdentityInterface
 
         if ($lang == 'et')
             return [
-                'username' => 'Логин',
-                'lname' => 'Фамилия',
-                'fname' => 'Имя',
-                'mname' => 'Отчество',
-                'arr_adrs' => 'Адрес',
-                'password' => 'Пароль',
-                'email' => 'Почта',
-                'addrStr' => 'Адрес',
-                'company' => 'Компания',
-                'lang' => 'Язык',
+                'username' => 'kasutaja',
+                'lname' => 'Perekonnanimi',
+                'fname' => 'Eesnimi',
+                'mname' => 'Keskmine nimi',
+                'arr_adrs' => 'aadress',
+                'password' => 'Parool',
+                'email' => 'Email',
+                'addrStr' => 'aadress',
+                'company' => 'Firma',
+                'lang' => 'kõnekeel',
             ];
 
 
