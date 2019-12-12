@@ -27,7 +27,7 @@ $lang_arr = Yii::$app->params['lang'][Yii::$app->language];
         'data' =>
             \yii\helpers\ArrayHelper::map(\app\models\Addr::slctLst(), 'id', 'name'),
         'language' => 'ru',
-        'options' => ['placeholder' => 'Выбрать адрес', 'multiple'=> true],
+        'options' => ['multiple'=> true],
         'pluginOptions' => [
             'allowClear' => true
         ],
