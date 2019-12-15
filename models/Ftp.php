@@ -67,7 +67,7 @@ class Ftp extends \yii\db\ActiveRecord
                 'ip' => 'aadress',
                 'user_name' => 'kasutaja nimi',
                 'user_pass' => 'kasutaja',
-                'active' => 'в работе',
+                'active' => 'tööl',
             ];
 
     }
