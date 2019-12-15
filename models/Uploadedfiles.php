@@ -39,11 +39,29 @@ class Uploadedfiles extends \yii\db\ActiveRecord
      */
     public function attributeLabels()
     {
-        return [
-            'id' => 'ID',
-            'name' => 'Name',
-            'whn' => 'Whn',
-        ];
+        $lang = Yii::$app->user->identity->lang;
+
+        if ($lang == 'ru')
+            return [
+                'id' => 'ID',
+                'name' => 'Имя файла',
+                'whn' => 'Дата загрузки',
+            ];
+
+        if ($lang == 'en')
+            return [
+                'id' => 'ID',
+                'name' => 'File name',
+                'whn' => 'Upload date',
+            ];
+
+        if ($lang == 'et')
+            return [
+                'id' => 'ID',
+                'name' => 'Faili nimi',
+                'whn' => 'Üleslaadimise kuupäev',
+            ];
+
     }
 
     public static function saveVals( $data, $addr ){

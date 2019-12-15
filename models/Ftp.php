@@ -55,7 +55,7 @@ class Ftp extends \yii\db\ActiveRecord
         if ($lang == 'en')
             return [
                 'id' => 'ID',
-                'ip' => 'Aderess',
+                'ip' => 'Adress',
                 'user_name' => 'Username',
                 'user_pass' => 'Password',
                 'active' => 'Active',
