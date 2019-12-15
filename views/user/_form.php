@@ -29,7 +29,7 @@ $lang_arr = Yii::$app->params['lang'][Yii::$app->language];
         'language' => 'ru',
         'options' => ['multiple'=> true],
         'pluginOptions' => [
-            'allowClear' => true
+            'allowClear' => false
         ],
     ]);
     ?>
