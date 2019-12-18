@@ -115,7 +115,7 @@ class Uploadedfiles extends \yii\db\ActiveRecord
                 fclose($handle);
             }
 //            unlink($floc);
-            rename($floc, "loaded/".$fname);
+            rename($floc, Yii::getAlias('@loaded').$fname);
             $model =  new Uploadedfiles();
             $model->name = $fname;
             $model->save();

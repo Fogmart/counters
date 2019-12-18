@@ -75,4 +75,34 @@ class Ftp extends \yii\db\ActiveRecord
     public static function getLst(){
         return self::find()->where(['active'=>1])->all();
     }
+
+    public static function LoadData(){
+        set_time_limit(600);
+        foreach (Ftp::getLst() as $ftp){
+            $conn_id = ftp_connect($ftp->ip);
+            if (ftp_login($conn_id, $ftp->user_name, $ftp->user_pass)) {
+                $contents = ftp_nlist($conn_id, ".");
+                foreach ($contents as $c) {
+                    if (in_array($c, array("./.", "./.."))) continue;
+                    $fname = str_replace("./", "", $c);
+                    if (!Uploadedfiles::isLoaded($fname)) {
+                        $local_file = str_replace("./", Yii::getAlias('@csv'), $c);
+                        ftp_get($conn_id, $local_file, $c, FTP_ASCII);
+                    }
+                }
+            }
+        }
+        $dir = Yii::getAlias('@csv');
+        $cdir = scandir($dir);
+        $files = [];
+        foreach ($cdir as $value) {
+            if (!in_array($value,array(".", "..", 'loaded'))){
+                $files[] = $value;
+            }
+        }
+
+        foreach ($files as $file){
+            Uploadedfiles::saveFile($file, $dir.$file);
+        }
+    }
 }
