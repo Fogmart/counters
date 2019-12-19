@@ -89,7 +89,7 @@ class Counter extends \yii\db\ActiveRecord
             $c->num = $num;
             $c->type = $tid;
             $c->addrid = $addrid;
-            $c->save();
+            $c->save(false);
             $id = $c->id;
         }
         return $id;

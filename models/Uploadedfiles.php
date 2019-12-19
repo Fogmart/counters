@@ -74,6 +74,7 @@ class Uploadedfiles extends \yii\db\ActiveRecord
 
         $v->whn = mktime(0, 0, 0, $dt[1] , $dt[2], $dt[0]);
         $type = CtTypes::getTypeID($data[2]);
+        if (!$type) return;
         if (preg_match('/\d+/', $data[2], $match)){
             $apartment = $match[0];
         } elseif (preg_match('/ULD/', $data[2], $match)){
@@ -105,7 +106,8 @@ class Uploadedfiles extends \yii\db\ActiveRecord
         if (!$u){
             if (($handle = fopen($floc, "r")) !== FALSE) {
                 $row = 0;
-                $addr = preg_replace('/[_\d+]+[.]csv/', "", $fname);
+                $addr = str_replace(Yii::getAlias('@csv'), "", $fname);
+                $addr = preg_replace('/[_\d+]+[.]csv/', "", $addr   );
                 $addr = preg_replace('/^\d+[_]/', "", $addr);
 
                 while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
