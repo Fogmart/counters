@@ -71,8 +71,8 @@ class Uploadedfiles extends \yii\db\ActiveRecord
         $dt = $data[0];
         $dt = explode(" ", $dt)[0];
         $dt = explode(".", $dt);
-
-        $v->whn = mktime(0, 0, 0, $dt[1] , $dt[2], $dt[0]);
+        date_default_timezone_set('UTC');
+        $v->whn = mktime(0, 0, 0, $dt[1], $dt[2], $dt[0]);
         $type = CtTypes::getTypeID($data[2]);
         if (!$type) return;
         if (preg_match('/\d+/', $data[2], $match)){
@@ -83,7 +83,6 @@ class Uploadedfiles extends \yii\db\ActiveRecord
             $apartment = '-';
         }
         $addrid = Addr::getAddrID($addr, $apartment);
-
         $v->ctid = Counter::getCounterID($data[1], $type, $addrid);
         if ($v->ctid) {
             $v->val = str_replace(",", ".", $data[3]);
