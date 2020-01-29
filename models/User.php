@@ -322,11 +322,10 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function setLang( $lang ){
         $this->lang = $lang;
+        if (isset($_SESSION['lang'])) $_SESSION['lang'] = $lang;
         $this->no_after_save = true;
         $this->save();
     }
-
 }
 
-//ALTER TABLE `user` ADD `lang` VARCHAR(10) NULL DEFAULT 'ru' AFTER `verification_token`;
 

@@ -6,6 +6,7 @@ return [
     'senderName' => 'Example.com mailer',
     'lang'=>[
         'ru' => [
+            'title' => 'Счетчики',
             'obj' => 'Объект',
             'usr' => 'Пользователи',
             'ctr' => 'Счетчики',
@@ -46,6 +47,7 @@ return [
 
         ],
         'en'=>[
+            'title' => 'Meters',
             'obj' => 'Object',
             'usr' => 'Users',
             'ctr' => 'Meters',
@@ -84,6 +86,7 @@ return [
             'allapartaments' => 'all apartaments',
         ],
         'et'=>[
+            'title' => 'Arvestid',
             'obj' => 'Objekt',
             'usr' => 'Kasutajad',
             'ctr' => 'Arvestid',

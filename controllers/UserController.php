@@ -147,7 +147,6 @@ class UserController extends LangController
             $lang = Yii::$app->request->post("lang");
             $model->setLang($lang);
         }
-        echo 1;
     }
 
 }
