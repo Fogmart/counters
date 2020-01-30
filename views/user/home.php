@@ -46,11 +46,9 @@ use yii\widgets\ActiveForm;
 <script src="/js/jquery.js"></script>
 <script>
     $(function () {
-        $(".ctr").click( function () {
-            window.open($("a", $(this)).attr("href"));
-        })
-        $(".ctraddr").click(function () {
-            $(".ctrs", $(this)).slideToggle()
+        $(".ctr").click( function (event) {
+            event.preventDefault();
+            document.location = $("a", $(this)).attr("href");
         })
         <?if ($i > 0) {?>
         $(".ctrs").hide()
